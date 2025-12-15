@@ -1,0 +1,28 @@
+# Extensions
+*.secret
+*.secrets
+*.log
+*.xlsx
+*.pdf
+*.egg-info
+
+# Folders
+ENV/
+VENV/
+env/
+venv/
+logs/
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Hidden
+.pytest_cache/
+.idea/
+.cache/
+.tox/
+.DS_Store
+.mypy_cache
+./config/.env
+.ipynb_checkpoints/
