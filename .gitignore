@@ -26,3 +26,4 @@ dist/
 .mypy_cache
 ./config/.env
 .ipynb_checkpoints/
+.env
