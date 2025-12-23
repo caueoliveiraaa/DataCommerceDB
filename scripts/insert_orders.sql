@@ -1,4 +1,4 @@
-/* 
+/*
 File: ~/DataCommerceDB/scripts/insert_orders.sql
 Purpose: Injects all orders into the orders table.
 */
