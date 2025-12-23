@@ -27,3 +27,6 @@ dist/
 ./config/.env
 .ipynb_checkpoints/
 .env
+
+# Files
+notes.txt
