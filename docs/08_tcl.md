@@ -66,3 +66,24 @@ This documentation provides an overview of the Transaction Control Language (TCL
 
 ```sql
 ```
+
+## ▶️ RELEASE SAVEPOINT
+
+### 1. RELEASE SAVEPOINT – PostgreSQL
+
+| Command                | Description                                                                |
+|:-----------------------|:---------------------------------------------------------------------------|
+| `RELEASE SAVEPOINT sp` | Removes a previously defined savepoint, making it unavailable for rollback |
+
+### 2. RELEASE SAVEPOINT – Standard x PostgreSQL
+
+| Standard SQL        | PostgreSQL          | Notes                                                    |
+|:--------------------|:--------------------|:---------------------------------------------------------|
+| `RELEASE SAVEPOINT` | `RELEASE SAVEPOINT` | Same in both; PostgreSQL fully supports the SQL standard |
+
+</br>
+
+### 3. RELEASE SAVEPOINT - Example
+
+```sql
+```
