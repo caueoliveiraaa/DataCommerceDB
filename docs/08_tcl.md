@@ -24,3 +24,24 @@ This documentation provides an overview of the Transaction Control Language (TCL
 
 ```sql
 ```
+
+## ▶️ ROLLBACK
+
+### 1. ROLLBACK – PostgreSQL
+
+| Command     | Description                                                                   |
+|:------------|:------------------------------------------------------------------------------|
+| `ROLLBACK`  | Undoes all changes made in the current transaction, restoring the prior state |
+
+### 2. ROLLBACK – Standard x PostgreSQL
+
+| Standard SQL  | PostgreSQL  | Notes                                                                   |
+|:--------------|:------------|:------------------------------------------------------------------------|
+| `ROLLBACK`    | `ROLLBACK`  | Same in both; cancels all operations since the last COMMIT or SAVEPOINT |
+
+</br>
+
+### 3. ROLLBACK - Example
+
+```sql
+```
