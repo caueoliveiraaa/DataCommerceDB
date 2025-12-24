@@ -45,3 +45,24 @@ This documentation provides an overview of the Transaction Control Language (TCL
 
 ```sql
 ```
+
+## ▶️ SAVEPOINT
+
+### 1. SAVEPOINT – PostgreSQL
+
+| Command        | Description                                                           |
+|:---------------|:----------------------------------------------------------------------|
+| `SAVEPOINT sp` | Defines a point within a transaction to which you can later roll back |
+
+### 2. SAVEPOINT – Standard x PostgreSQL
+
+| Standard SQL  | PostgreSQL  | Notes                                                      |
+|:--------------|:------------|:-----------------------------------------------------------|
+| `SAVEPOINT`   | `SAVEPOINT` | Same in both; allows partial rollback within a transaction |
+
+</br>
+
+### 3. SAVEPOINT - Example
+
+```sql
+```
