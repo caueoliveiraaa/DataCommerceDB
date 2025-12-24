@@ -109,3 +109,25 @@ This documentation provides an overview of the Transaction Control Language (TCL
 
 ```sql
 ```
+
+## ▶️ SET CONSTRAINTS
+
+### 1. SET CONSTRAINTS – PostgreSQL
+
+| Command                                | Description                                                              |
+|:---------------------------------------|:-------------------------------------------------------------------------|
+| `SET CONSTRAINTS ALL DEFERRED`         | Defers checking of constraints until transaction commit                  |
+| `SET CONSTRAINTS constraint_name ...`  | Controls when specific constraints are enforced (IMMEDIATE or DEFERRED)  |
+
+### 2. SET CONSTRAINTS – Standard x PostgreSQL
+
+| Standard SQL      | PostgreSQL        | Notes                                                                        |
+|:------------------|:------------------|:-----------------------------------------------------------------------------|
+| `SET CONSTRAINTS` | `SET CONSTRAINTS` | Same in both; PostgreSQL supports deferred and immediate constraint checking |
+
+</br>
+
+### 3. SET CONSTRAINTS - Example
+
+```sql
+```
