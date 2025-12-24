@@ -87,3 +87,25 @@ This documentation provides an overview of the Transaction Control Language (TCL
 
 ```sql
 ```
+
+## ▶️ SET TRANSACTION
+
+### 1. SET TRANSACTION – PostgreSQL
+
+| Command                                | Description                                                                                      |
+|:---------------------------------------|:-------------------------------------------------------------------------------------------------|
+| `SET TRANSACTION ISOLATION LEVEL ...`  | Sets isolation level for the current transaction (READ COMMITTED, REPEATABLE READ, SERIALIZABLE) |
+| `SET TRANSACTION READ WRITE/READ ONLY` | Defines whether the transaction can modify data or only read                                     |
+
+### 2. SET TRANSACTION – Standard x PostgreSQL
+
+| Standard SQL      | PostgreSQL        | Notes                                                    |
+|:------------------|:------------------|:---------------------------------------------------------|
+| `SET TRANSACTION` | `SET TRANSACTION` | Same in both; PostgreSQL fully supports the SQL standard |
+
+</br>
+
+### 3. SET TRANSACTION - Example
+
+```sql
+```
