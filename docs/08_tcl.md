@@ -201,7 +201,7 @@ values (999, 'Charlie');
 commit;
 ```
 
-## ▶️ MORE EXAMPLES
+## ▶️ PRACTICAL EXAMPLES
 
 ### Processing an order with multiple steps, using savepoints, constraints, and transaction settings
 
@@ -243,5 +243,41 @@ insert into customers (id, name)
 values (9999, 'bob');
 
 -- Finally commit everything 
+commit;
+```
+
+### Banking transfer
+
+```sql
+begin;
+set transaction isolation level repeatable read;
+
+update accounts set balance = balance - 500 where id = 1;
+savepoint after_debit;
+
+update accounts set balance = balance + 500 where id = 2;
+
+-- If credit fails, rollback only to after_debit
+rollback to after_debit;
+
+commit;
+```
+
+### Inventory management
+
+```sql
+begin;
+
+insert into inventory_log (item_id, action)
+values (10, 'reserved');
+savepoint reserve_item;
+
+update stock
+set quantity = quantity - 1
+where item_id = 10;
+
+-- If stock update fails, rollback to reserve_item
+rollback to reserve_item;
+
 commit;
 ```
