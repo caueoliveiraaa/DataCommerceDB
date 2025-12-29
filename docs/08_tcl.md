@@ -35,6 +35,7 @@ WHERE customer_id = 1;
 COMMIT;
 
 -- After COMMIT, the new customer and balance update are permanently stored
+-- The BEGIN keyword must be paired with COMMIT and ROLLBACK, to avoid locks or unexpected behavior and close the transaction.
 ```
 
 ## ▶️ ROLLBACK
@@ -201,4 +202,3 @@ COMMIT;
 ```
 
 ## ▶️ MORE EXAMPLES
-
