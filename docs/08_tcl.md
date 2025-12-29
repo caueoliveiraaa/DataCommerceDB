@@ -22,17 +22,17 @@ It highlights how they work, how they differ, and when to use each one. Practica
 ### 3. COMMIT - Example
 
 ```sql
-BEGIN;
+begin;
 
-INSERT INTO customers (id, name)
-VALUES (1, 'Alice');
+insert into customers (id, name)
+values (1, 'Alice');
 
-UPDATE accounts 
-SET balance = balance - 100
-WHERE customer_id = 1;
+update accounts 
+set balance = balance - 100
+where customer_id = 1;
 
 -- Make all changes permanent
-COMMIT;
+commit;
 
 -- After COMMIT, the new customer and balance update are permanently stored
 -- The BEGIN keyword must be paired with COMMIT and ROLLBACK, to avoid locks or unexpected behavior and close the transaction.
@@ -55,17 +55,17 @@ COMMIT;
 ### 3. ROLLBACK - Example
 
 ```sql
-BEGIN;
+begin;
 
-INSERT INTO customers (id, name)
-VALUES (2, 'Gabriel');
+insert into customers (id, name)
+values (2, 'Gabriel');
 
-UPDATE accounts 
-SET balance = balance - 200
-WHERE customer_id = 2;
+update accounts 
+set balance = balance - 200
+where customer_id = 2;
 
 -- Cancel all changes made in this transaction
-ROLLBACK;
+rollback;
 
 -- The insert and update are undone; the database returns to its prior state
 ```
@@ -87,20 +87,20 @@ ROLLBACK;
 ### 3. SAVEPOINT - Example
 
 ```sql
-BEGIN;
+begin;
 
-INSERT INTO orders (id, product)
-VALUES (101, 'Laptop');
+insert into orders (id, product)
+values (101, 'Laptop');
 
-SAVEPOINT spl;
+savepoint spl;
 
-INSERT INTO orders (id, product)
-VALUES (102, 'Phone');
+insert into orders (id, product)
+values (102, 'Phone');
 
 -- Roll back only to the savepoint, undoing the second insert
-ROLLBACK TO spl;
+rollback to spl;
 
-COMMIT;
+commit;
 
 -- The Laptop order remains, but the Phone order is discarded
 ```
@@ -122,17 +122,17 @@ COMMIT;
 ### 3. RELEASE SAVEPOINT - Example
 
 ```sql
-BEGIN;
+begin;
 
-INSERT INTO orders (id, product)
-VALUES (201, 'Tablet');
+insert into orders (id, product)
+values (201, 'Tablet');
 
-SAVEPOINT sp2;
+savepoint sp2;
 
 -- Once released, you cannot rool back to sp2 anymore
-RELEASE SAVEPOINT sp2;
+release savepoint sp2;
 
-COMMIT;
+commit;
 
 -- The savepoint is removed; transaction continues normally
 ```
@@ -155,16 +155,16 @@ COMMIT;
 ### 3. SET TRANSACTION - Example
 
 ```sql
-BEGIN;
+begin;
 
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-SET TRANSACTION READ ONLY;
+set transaction isolation level serializable;
+set transaction read only;
 
 -- This query will run a read-only, serializable transaction
-SELECT * FROM accounts
-WHERE balance > 1000;
+select * from accounts
+where balance > 1000;
 
-COMMIT;
+commit;
 
 -- Ensures the transaction cannot modify data and uses the strictest isolation
 ```
@@ -187,18 +187,61 @@ COMMIT;
 ### 3. SET CONSTRAINTS - Example
 
 ```sql
-BEGIN;
+begin;
 
-SET CONSTRAINT ALL DEFERRED;
+set constraint all deferred;
 
-INSERT INTO orders (id, customer_id) -- customer doesn’t exist yet
-VALUES (301, 999);
+insert into orders (id, customer_id) -- customer doesn’t exist yet
+values (301, 999);
 
-INSERT INTO customers (id, name)
-VALUES (999, 'Charlie');
+insert into customers (id, name)
+values (999, 'Charlie');
 
 -- Constraints checked deferred unit commit, so both inserts succeed
-COMMIT;
+commit;
 ```
 
 ## ▶️ MORE EXAMPLES
+
+### Processing an order with multiple steps, using savepoints, constraints, and transaction settings
+
+```sql
+begin;
+
+-- Set transactions properties
+set transaction isolation level serializable;
+set transaction read write;
+
+-- Insert customer and order
+insert into customers (id, name)
+values (1001, 'Alice');
+
+insert into orders (id, customer_id, product)
+values (5001, 1001, 'Laptop');
+
+-- Defines a savepoint before payment
+savepoint before_payment;
+
+-- Try to insert payment
+insert into payments (id, order_id, amount) 
+values (9001, 5001, 1200);
+
+-- Suppose something goes wrong: rollback only payment 
+rollback to before_payment;
+
+-- Release the savepoint (no longer needed) 
+release savepoint before_payment;
+
+-- Defer constraints until commit 
+set constraints all deferred;
+
+-- Insert dependent data out of order 
+insert into orders (id, customer_id, product) 
+values (5002, 9999, 'phone'); -- customer not yet created
+
+insert into customers (id, name) 
+values (9999, 'bob');
+
+-- Finally commit everything 
+commit;
+```
