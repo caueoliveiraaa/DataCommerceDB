@@ -1,6 +1,7 @@
 # PostgreSQL & SQL: Transaction Control (TCL)
 
-This documentation provides an overview of the Transaction Control Language (TCL) commands available in standard SQL and PostgreSQL. It highlights how they work, how they differ, and when to use each one. Practical examples are included to help you understand their behavior in real database designs.
+This documentation provides an overview of the Transaction Control Language (TCL) commands available in standard SQL and PostgreSQL.</br>
+It highlights how they work, how they differ, and when to use each one. Practical examples are included to help you understand their behavior in real database designs.
 
 </br>
 
@@ -18,11 +19,22 @@ This documentation provides an overview of the Transaction Control Language (TCL
 |:--------------|:------------|:-----------------------------------------------------------------------|
 | `COMMIT`      | `COMMIT`    | Same in both; ensures durability of changes once transaction is closed |
 
-</br>
-
 ### 3. COMMIT - Example
 
 ```sql
+BEGIN;
+
+INSERT INTO customers (id, name)
+VALUES (1, 'Alice');
+
+UPDATE accounts 
+SET balance = balance - 100
+WHERE customer_id = 1;
+
+-- Make all changes permanent
+COMMIT;
+
+-- After COMMIT, the new customer and balance update are permanently stored
 ```
 
 ## ▶️ ROLLBACK
@@ -39,11 +51,22 @@ This documentation provides an overview of the Transaction Control Language (TCL
 |:--------------|:------------|:------------------------------------------------------------------------|
 | `ROLLBACK`    | `ROLLBACK`  | Same in both; cancels all operations since the last COMMIT or SAVEPOINT |
 
-</br>
-
 ### 3. ROLLBACK - Example
 
 ```sql
+BEGIN;
+
+INSERT INTO customers (id, name)
+VALUES (2, 'Gabriel');
+
+UPDATE accounts 
+SET balance = balance - 200
+WHERE customer_id = 2;
+
+-- Cancel all changes made in this transaction
+ROLLBACK;
+
+-- The insert and update are undone; the database returns to its prior state
 ```
 
 ## ▶️ SAVEPOINT
@@ -60,11 +83,25 @@ This documentation provides an overview of the Transaction Control Language (TCL
 |:--------------|:------------|:-----------------------------------------------------------|
 | `SAVEPOINT`   | `SAVEPOINT` | Same in both; allows partial rollback within a transaction |
 
-</br>
-
 ### 3. SAVEPOINT - Example
 
 ```sql
+BEGIN;
+
+INSERT INTO orders (id, product)
+VALUES (101, 'Laptop');
+
+SAVEPOINT spl;
+
+INSERT INTO orders (id, product)
+VALUES (102, 'Phone');
+
+-- Roll back only to the savepoint, undoing the second insert
+ROLLBACK TO spl;
+
+COMMIT;
+
+-- The Laptop order remains, but the Phone order is discarded
 ```
 
 ## ▶️ RELEASE SAVEPOINT
@@ -81,11 +118,22 @@ This documentation provides an overview of the Transaction Control Language (TCL
 |:--------------------|:--------------------|:---------------------------------------------------------|
 | `RELEASE SAVEPOINT` | `RELEASE SAVEPOINT` | Same in both; PostgreSQL fully supports the SQL standard |
 
-</br>
-
 ### 3. RELEASE SAVEPOINT - Example
 
 ```sql
+BEGIN;
+
+INSERT INTO orders (id, product)
+VALUES (201, 'Tablet');
+
+SAVEPOINT sp2;
+
+-- Once released, you cannot rool back to sp2 anymore
+RELEASE SAVEPOINT sp2;
+
+COMMIT;
+
+-- The savepoint is removed; transaction continues normally
 ```
 
 ## ▶️ SET TRANSACTION
@@ -103,11 +151,21 @@ This documentation provides an overview of the Transaction Control Language (TCL
 |:------------------|:------------------|:---------------------------------------------------------|
 | `SET TRANSACTION` | `SET TRANSACTION` | Same in both; PostgreSQL fully supports the SQL standard |
 
-</br>
-
 ### 3. SET TRANSACTION - Example
 
 ```sql
+BEGIN;
+
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SET TRANSACTION READ ONLY;
+
+-- This query will run a read-only, serializable transaction
+SELECT * FROM accounts
+WHERE balance > 1000;
+
+COMMIT;
+
+-- Ensures the transaction cannot modify data and uses the strictest isolation
 ```
 
 ## ▶️ SET CONSTRAINTS
@@ -125,9 +183,22 @@ This documentation provides an overview of the Transaction Control Language (TCL
 |:------------------|:------------------|:-----------------------------------------------------------------------------|
 | `SET CONSTRAINTS` | `SET CONSTRAINTS` | Same in both; PostgreSQL supports deferred and immediate constraint checking |
 
-</br>
-
 ### 3. SET CONSTRAINTS - Example
 
 ```sql
+BEGIN;
+
+SET CONSTRAINT ALL DEFERRED;
+
+INSERT INTO orders (id, customer_id) -- customer doesn’t exist yet
+VALUES (301, 999);
+
+INSERT INTO customers (id, name)
+VALUES (999, 'Charlie');
+
+-- Constraints checked deferred unit commit, so both inserts succeed
+COMMIT;
 ```
+
+## ▶️ MORE EXAMPLES
+
