@@ -17,18 +17,18 @@
 
 ```sql
 -- ENUM type creation
-CREATE TYPE mood AS ENUM ('happy', 'sad', 'neutral');
+create type mood as enum ('happy', 'sad', 'neutral');
 
-CREATE TABLE special_examples (
+create table special_examples (
     current_mood   mood,   -- custom enumeration
-    ip_address     INET,   -- IPv4 or IPv6
-    network_block  CIDR,   -- network with subnet
-    location_point POINT,  -- (x, y)
-    path_line      LINE,   -- infinite line
-    area_circle    CIRCLE  -- <(x, y), radius>
+    ip_address     inet,   -- IPv4 or IPv6
+    network_block  cidr,   -- network with subnet
+    location_point point,  -- (x, y)
+    path_line      line,   -- infinite line
+    area_circle    circle  -- <(x, y), radius>
 );
 
-INSERT INTO special_examples (
+insert into special_examples (
     current_mood,
     ip_address,
     network_block,
@@ -36,7 +36,7 @@ INSERT INTO special_examples (
     path_line,
     area_circle
 )
-VALUES (
+values (
     'happy',
     '192.168.1.10',
     '192.168.1.0/24',
@@ -45,5 +45,3 @@ VALUES (
     '<(5,5), 3>'      -- circle with center (5,5) and radius 3
 );
 ```
-
-</br>
