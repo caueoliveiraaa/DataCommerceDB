@@ -9,21 +9,21 @@ Notes:
     - 'updated_at' is automatically maintained by a trigger.
 */
 
-CREATE TABLE users (
-    user_id    INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    email      VARCHAR(255) UNIQUE NOT NULL,
-    name       VARCHAR(255) NOT NULL,
-    age        INTEGER CHECK (age > 0),
-    address    VARCHAR(255),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+create table users (
+    user_id    integer generated always as identity primary key,
+    email      varchar(255) unique not null,
+    name       varchar(255) not null,
+    age        integer check (age > 0),
+    address    varchar(255),
+    updated_at timestamp not null default now(),
+    created_at timestamp not null default now()
 );
 
-COMMENT ON TABLE users             IS 'All users of the system';
-COMMENT ON COLUMN users.user_id    IS 'Unique identifier for the user';
-COMMENT ON COLUMN users.email      IS 'Unique email address for identification';
-COMMENT ON COLUMN users.name       IS 'First name of the user (cannot be null)';
-COMMENT ON COLUMN users.age        IS 'Age of the user (must be greater than zero)';
-COMMENT ON COLUMN users.address    IS 'Residential address of the user';
-COMMENT ON COLUMN users.updated_at IS 'Timestamp of the last update to this row';
-COMMENT ON COLUMN users.created_at IS 'Timestamp when the row was created';
+comment on table users             is 'All users of the system';
+comment on column users.user_id    is 'Unique identifier for the user';
+comment on column users.email      is 'Unique email address for identification';
+comment on column users.name       is 'First name of the user (cannot be null)';
+comment on column users.age        is 'Age of the user (must be greater than zero)';
+comment on column users.address    is 'Residential address of the user';
+comment on column users.updated_at is 'Timestamp of the last update to this row';
+comment on column users.created_at is 'Timestamp when the row was created';

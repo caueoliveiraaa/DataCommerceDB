@@ -7,19 +7,19 @@ Notes:
     - 'updated_at' is automatically maintained by a trigger.
 */
 
-CREATE TABLE products (
-    product_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name       VARCHAR(50) NOT NULL,
-    price      NUMERIC(10, 2) NOT NULL CHECK (price > 0.0),
-    category   VARCHAR(20),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+create table products (
+    product_id integer generated always as identity primary key,
+    name       varchar(50) not null,
+    price      numeric(10, 2) not null check (price > 0.0),
+    category   varchar(20),
+    updated_at timestamp not null default now(),
+    created_at timestamp not null default now()
 );
 
-COMMENT ON TABLE products             IS 'All registered products that can be bought by users';
-COMMENT ON COLUMN products.product_id IS 'Unique identifier of each product';
-COMMENT ON COLUMN products.name       IS 'product name (cannot be null)';
-COMMENT ON COLUMN products.price      IS 'Product price (cannot be null or negative)';
-COMMENT ON COLUMN products.category   IS 'Category or classification of the product';
-COMMENT ON COLUMN products.updated_at IS 'Timestamp of the last update to this row';
-COMMENT ON COLUMN products.created_at IS 'Timestamp when the row was created';
+comment on table products             is 'All registered products that can be bought by users';
+comment on column products.product_id is 'Unique identifier of each product';
+comment on column products.name       is 'product name (cannot be null)';
+comment on column products.price      is 'Product price (cannot be null or negative)';
+comment on column products.category   is 'Category or classification of the product';
+comment on column products.updated_at is 'Timestamp of the last update to this row';
+comment on column products.created_at is 'Timestamp when the row was created';
