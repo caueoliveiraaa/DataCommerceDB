@@ -179,7 +179,7 @@ where id = 1; -- returns 100
 
 -- meanwhile, another transaction commits a deposit of 50
 
--- Second query sees updated balance
+-- second query sees updated balance
 select balance
 from accounts 
 where id = 1; -- returns 150
@@ -348,7 +348,6 @@ Best Practices:
 
 - Use deferred constraints when inserting related rows in different tables within the same transaction.
 - Use immediate constraints when you want validation at each step.
-- Always declare constraints as deferrable if you plan to use set constraints.
 
 ### 3. SET CONSTRAINTS - Example
 
