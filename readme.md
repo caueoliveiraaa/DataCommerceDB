@@ -2,8 +2,8 @@
 
 ## About the project
 
-A PostgreSQL‑based analytical database designed to explore user behavior, product performance, and sales trends.</br>
-This project includes a complete SQL‑only workflow with tables, views, functions, triggers, and procedures, enabling deep data analysis and clean database design practices.
+A PostgreSQL analytical database project focused on **user behavior, product performance, and sales trends.**</br>
+It provides a SQL‑only workflow with modular scripts for database lifecycle management, schema definition, and data population. The project emphasizes clean design practices and prepares the ground for advanced analytics through views, functions, and procedures.
 
 ## Project Structure
 
