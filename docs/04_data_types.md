@@ -1,66 +1,66 @@
 # PostgreSQL & SQL: Data Types
 
-This documentation provides an overview of the data types available in standard SQL and PostgreSQL, highlighting how they work, how they differ, and when to use each one. It also includes practical examples to help you understand their behavior in real database designs.
+This documentation provides an overview of the data types available IN standard SQL AND PostgreSQL, highlighting how they work, how they differ, AND WHEN to use each one. It also includes practical examples to help you understand their behavior IN REAL database designs.
 
 </br>
 
-## 🔢 Numeric Types
+## 🔢 NUMERIC Types
 
-### 1. Numeric - PostgreSQL
+### 1. NUMERIC - PostgreSQL
 
-| Type               | Description                             |
+| TYPE               | Description                             |
 |:-------------------|:----------------------------------------|
-| `smallint`         | Integer range from −32,768 to 32,767    |
-| `integer` / `int`  | Standard 32‑bit integer                 |
-| `bigint`           | 64‑bit integer                          |
-| `numeric(p,s)`     | Exact decimal, ideal for financial data |
-| `decimal(p,s)`     | Alias of numeric in PostgreSQL          |
-| `real`             | 32‑bit floating‑point number            |
-| `double precision` | 64‑bit floating‑point number            |
-| `serial`           | Auto‑incrementing (integer)             |
-| `bigserial`        | Auto‑incrementing (bigint)              |
-| `smallserial`      | Auto‑incrementing (smallint)            |
+| `SMALLINT`         | INTEGER range FROM −32,768 to 32,767    |
+| `INTEGER` / `INT`  | Standard 32‑bit INTEGER                 |
+| `BIGINT`           | 64‑bit INTEGER                          |
+| `NUMERIC(P,s)`     | Exact DECIMAL, ideal for financial data |
+| `DECIMAL(P,s)`     | Alias of NUMERIC IN PostgreSQL          |
+| `REAL`             | 32‑bit floating‑POINT number            |
+| `DOUBLE PRECISION` | 64‑bit floating‑POINT number            |
+| `SERIAL`           | Auto‑incrementing (INTEGER)             |
+| `BIGSERIAL`        | Auto‑incrementing (BIGINT)              |
+| `SMALLSERIAL`      | Auto‑incrementing (SMALLINT)            |
 
 </br>
 
-### 2. Numeric - Standard x PostgreSQL
+### 2. NUMERIC - Standard x PostgreSQL
 
 | Standard SQL             | PostgreSQL              | Notes                                              |
 |:-------------------------|:------------------------|:---------------------------------------------------|
-| `smallint`               | `smallint`              | Same in both; range −32,768 to 32,767              |
-| `integer` / `int`        | `integer` / `int`       | Same in both; 32‑bit integer                       |
-| `bigint`                 | `bigint`                | Same in both; 64‑bit integer                       |
-| `numeric(p,s)`           | `numeric(p,s)`          | Fully standard; exact precision; ideal for money   |
-| `decimal(p,s)`           | `decimal(p,s)`          | PostgreSQL treats decimal as an alias for numeric  |
-| `real`                   | `real`                  | Standard 32‑bit float                              |
-| `double precision`       | `double precision`      | Standard 64‑bit float                              |
-| `generated as identity`  | `generated as identity` | SQL‑standard auto‑increment; preferred over serial |
-| (no standard equivalent) | `serial`                | PostgreSQL‑specific auto‑incrementing integer      |
-| (no standard equivalent) | `bigserial`             | PostgreSQL‑specific auto‑incrementing bigint       |
-| (no standard equivalent) | `smallserial`           | PostgreSQL‑specific auto‑incrementing smallint     |
+| `SMALLINT`               | `SMALLINT`              | Same IN both; range −32,768 to 32,767              |
+| `INTEGER` / `INT`        | `INTEGER` / `INT`       | Same IN both; 32‑bit INTEGER                       |
+| `BIGINT`                 | `BIGINT`                | Same IN both; 64‑bit INTEGER                       |
+| `NUMERIC(p,s)`           | `NUMERIC(p,s)`          | Fully standard; exact precision; ideal for money   |
+| `DECIMAL(p,s)`           | `DECIMAL(p,s)`          | PostgreSQL treats DECIMAL AS an alias for NUMERIC  |
+| `REAL`                   | `REAL`                  | Standard 32‑bit float                              |
+| `DOUBLE PRECISION`       | `DOUBLE PRECISION`      | Standard 64‑bit float                              |
+| `GENERATED AS IDENTITY`  | `GENERATED AS IDENTITY` | SQL‑standard auto‑increment; preferred over SERIAL |
+| (no standard equivalent) | `SERIAL`                | PostgreSQL‑specific auto‑incrementing INTEGER      |
+| (no standard equivalent) | `BIGSERIAL`             | PostgreSQL‑specific auto‑incrementing BIGINT       |
+| (no standard equivalent) | `SMALLSERIAL`           | PostgreSQL‑specific auto‑incrementing SMALLINT     |
 
 </br>
 
-### 3. Numeric - Example
+### 3. NUMERIC - Example
 
 ```sql
-create table numeric_examples (
-    small_count      smallint,                       -- small integer range
-    standard_count   integer,                        -- standard 32-bit integer
-    large_count      bigint,                         -- large integer range
-    price            numeric(10,2),                  -- exact decimal (money)
-    discount_rate    decimal(5,4),                   -- same as numeric
-    temperature      real,                           -- 32-bit float
-    precision_score  double precision,               -- 64-bit float
+CREATE TABLE numeric_examples (
+    small_count      SMALLINT,                       -- small INTEGER range
+    standard_count   INTEGER,                        -- standard 32-bit INTEGER
+    large_count      BIGINT,                         -- large INTEGER range
+    price            NUMERIC(10,2),                  -- exact DECIMAL (money)
+    discount_rate    DECIMAL(5,4),                   -- same AS NUMERIC
+    temperature      REAL,                           -- 32-bit float
+    precision_score  DOUBLE PRECISION,               -- 64-bit float
 
     -- PostgreSQL-specific auto-increment types
-    id_serial        serial,                         -- auto-incrementing int
-    id_bigserial     bigserial,                      -- auto-incrementing bigint
-    id_smallserial   smallserial,                    -- auto-incrementing smallint
+    id_serial        SERIAL,                         -- auto-incrementing INT
+    id_bigserial     BIGSERIAL,                      -- auto-incrementing BIGINT
+    id_smallserial   SMALLSERIAL,                    -- auto-incrementing SMALLINT
 
-    -- SQL-standard identity columns (recommended)
-    id_identity_always   integer generated always as identity,
-    id_identity_default  bigint  generated by default as identity
+    -- SQL-standard IDENTITY columns (recommended)
+    id_identity_always   INTEGER GENERATED ALWAYS AS IDENTITY,
+    id_identity_DEFAULT  BIGINT  GENERATED BY DEFAULT AS IDENTITY
 );
 ```
 
@@ -70,23 +70,23 @@ create table numeric_examples (
 
 Notes:
 
-- Both represent whole numbers without decimals.
-- integer (or int) is 32‑bit; bigint is 64‑bit.
-- Use integer for typical counters and IDs unless you expect extremely large values.
-- Use bigint for large datasets, analytics, or high‑volume identifiers.
+- Both represent whole numbers without DECIMALs.
+- INTEGER (OR INT) IS 32‑bit; BIGINT IS 64‑bit.
+- Use INTEGER for typical counters AND IDs unless you expect extremely large VALUES.
+- Use BIGINT for large datasets, analytics, OR high‑volume identifiers.
 
 Similarities:
 
-- Both are exact integer types.
+- Both are exact INTEGER types.
 - Both support the same arithmetic operations.
-- Both behave the same in indexing, constraints, and performance (except for size).
+- Both behave the same IN indexing, constraints, AND performance (except for size).
 
 Differences:
 
-- integer range: −2,147,483,648 to 2,147,483,647.
-- bigint range: −9 quintillion to +9 quintillion.
-- bigint uses more storage (8 bytes vs 4 bytes).
-- bigint is safer for large auto‑incrementing ids.
+- INTEGER range: −2,147,483,648 to 2,147,483,647.
+- BIGINT range: −9 quintillion to +9 quintillion.
+- BIGINT uses more storage (8 bytes vs 4 bytes).
+- BIGINT IS safer for large auto‑incrementing ids.
 
 </br>
 
@@ -94,23 +94,23 @@ Differences:
 
 Notes:
 
-- Numeric and decimal are exact precision types.
-- Real and double precision are floating‑point types with approximate values.
-- Use numeric/decimal for money, finance, and exact calculations.
-- Use real/double precision for scientific or statistical workloads.
+- NUMERIC AND DECIMAL are exact precision types.
+- REAL AND DOUBLE PRECISION are floating‑POINT types with approximate VALUES.
+- Use NUMERIC/DECIMAL for money, finance, AND exact calculations.
+- Use REAL/DOUBLE PRECISION for scientific OR statistical workloads.
 
 Similarities:
 
-- Numeric and decimal behave identically in PostgreSQL.
-- Real and double precision both store approximate values.
-- All four types support arithmetic operations and casting.
+- NUMERIC AND DECIMAL behave identically IN PostgreSQL.
+- REAL AND DOUBLE PRECISION both store approximate VALUES.
+- ALL four types support arithmetic operations AND casting.
 
 Differences:
 
-- Numeric(p,s) and decimal(p,s) store exact values with user‑defined precision.
-- Real is 32‑bit floating point; double precision is 64‑bit.
-- Floating‑point types can introduce rounding errors; numeric/decimal do not.
-- Floating‑point types are faster and use less storage than numeric.
+- NUMERIC(p,s) AND DECIMAL(p,s) store exact VALUES with user‑defined precision.
+- REAL IS 32‑bit floating POINT; DOUBLE PRECISION IS 64‑bit.
+- Floating‑POINT types can introduce rounding errors; NUMERIC/DECIMAL do NOT.
+- Floating‑POINT types are faster AND use less storage than NUMERIC.
 
 </br>
 
@@ -118,36 +118,36 @@ Differences:
 
 Notes:
 
-- Serial and BIGSERIAL are PostgreSQL‑specific convenience types.
-- They automatically create a sequence and set a default value.
-- Identity is SQL‑standard and preferred for modern PostgreSQL.
-- Identity does not create a separate sequence object unless needed.
+- SERIAL AND BIGSERIAL are PostgreSQL‑specific convenience types.
+- They automatically CREATE a SEQUENCE AND SET a DEFAULT value.
+- IDENTITY IS SQL‑standard AND preferred for modern PostgreSQL.
+- IDENTITY does NOT CREATE a separate SEQUENCE object unless needed.
 
 Similarities:
 
-- All generate auto‑incrementing integer values.
-- All can be used as primary keys.
-- All integrate with indexes and constraints normally.
+- ALL generate auto‑incrementing INTEGER VALUES.
+- ALL can be used AS PRIMARY KEYs.
+- ALL integrate with indexes AND constraints normally.
 
 Differences:
 
-- Serial → auto‑incrementing integer.
-- Bigserial → auto‑incrementing bigint.
-- Identity → SQL‑standard; supports generated always or by default.
-- Serial creates a separate sequence; identity ties the sequence to the column definition.
+- SERIAL → auto‑incrementing INTEGER.
+- BIGSERIAL → auto‑incrementing BIGINT.
+- IDENTITY → SQL‑standard; supports generated always OR BY DEFAULT.
+- SERIAL creates a separate SEQUENCE; IDENTITY ties the SEQUENCE to the column definition.
 
 </br>
 
-## 📖 Text Types
+## 📖 TEXT Types
 
 ### Strings - PostgreSQL
 
-| Type                               | Description                                           |
+| TYPE                               | Description                                           |
 |:-----------------------------------|:------------------------------------------------------|
-| `text`                             | Unlimited length; PostgreSQL‑specific                 |
-| `varchar(n)`                       | Variable length with limit SQL standard               |
-| `varchar`                          | Unlimited length; behaves the same as TEXT internally |
-| `char(n)`                          | Fixed‑length, space‑padded string; rarely recommended |
+| `TEXT`                             | Unlimited length; PostgreSQL‑specific                 |
+| `VARCHAR(n)`                       | Variable length with LIMIT SQL standard               |
+| `VARCHAR`                          | Unlimited length; behaves the same AS TEXT internally |
+| `CHAR(n)`                          | Fixed‑length, space‑padded string; rarely recommended |
 
 </br>
 
@@ -155,47 +155,47 @@ Differences:
 
 | Standard SQL             | PostgreSQL   | Notes                                                         |
 |:-------------------------|:-------------|:--------------------------------------------------------------|
-| `char(n)`                | `char(n)`    | Same behavior; fixed‑length and padded                        |
-| `varchar(n)`             | `varchar(n)` | Same behavior; length‑limited                                 |
-| (no standard equivalent) | `varchar`    | PostgreSQL allows unlimited varchar; not part of SQL standard |
-| (no standard equivalent) | `text`       | PostgreSQL‑specific; unlimited length                         |
+| `CHAR(n)`                | `CHAR(n)`    | Same behavior; fixed‑length AND padded                        |
+| `VARCHAR(n)`             | `VARCHAR(n)` | Same behavior; length‑limited                                 |
+| (no standard equivalent) | `VARCHAR`    | PostgreSQL allows unlimited VARCHAR; NOT part of SQL standard |
+| (no standard equivalent) | `TEXT`       | PostgreSQL‑specific; unlimited length                         |
 
 </br>
 
 ### Strings - Example
 
 ```sql
-create table text_examples (
-    description_text     text,        -- unlimited length
-    username_limited     varchar(30), -- max 30 characters
-    comment_unlimited    varchar,     -- unlimited, same as text
-    country_code         char(2)      -- fixed 2-character code
+CREATE TABLE text_examples (
+    description_text     TEXT,        -- unlimited length
+    username_limited     VARCHAR(30), -- MAX 30 characters
+    comment_unlimited    VARCHAR,     -- unlimited, same AS TEXT
+    country_code         CHAR(2)      -- fixed 2-character code
 );
 ```
 
 </br>
 
-### 🆚 TEXT vs VARCHAR in PostgreSQL
+### 🆚 TEXT vs VARCHAR IN PostgreSQL
 
 Notes:
 
-- PostgreSQL supports both text and varchar for storing variable‑length strings.
+- PostgreSQL supports both TEXT AND VARCHAR for storing variable‑length strings.
 - They behave similarly because PostgreSQL stores them using the same internal mechanism.
-- The type VARCHAR is part of the SQL standard, however text is PostgreSQL‑specific.
-- For most PostgreSQL projects, text is preferred unless you need a strict length constraint for business rules.
+- The TYPE VARCHAR IS part of the SQL standard, however TEXT IS PostgreSQL‑specific.
+- For most PostgreSQL projects, TEXT IS preferred unless you need a strict length CONSTRAINT for business rules.
 
 Similarities:
 
-- Both can store strings of unlimited length (when varchar has no limit).
-- Both use the same internal storage representation in PostgreSQL.
-- No performance difference in normal usage.
+- Both can store strings of unlimited length (WHEN VARCHAR has no LIMIT).
+- Both use the same internal storage representation IN PostgreSQL.
+- No performance difference IN normal usage.
 
 Differences:
 
-- Varchar(n) enforces a maximum length. If exceeded, PostgreSQL throws an error.
-- Text has no length limit.
-- Varchar(n) performs an extra check to ensure the string fits the limit. This adds a tiny CPU cost.
-- Text does not validate length.
+- VARCHAR(n) enforces a maximum length. If exceeded, PostgreSQL throws an error.
+- TEXT has no length LIMIT.
+- VARCHAR(n) performs an extra CHECK to ensure the string fits the LIMIT. This adds a tiny CPU cost.
+- TEXT does NOT validate length.
 
 </br>
 
@@ -204,111 +204,111 @@ Differences:
 Notes:
 
 - Both are SQL‑standard character types.
-- Char(n) always stores fixed‑length strings, padding with spaces if needed.
-- Varchar(n) stores variable‑length strings up to a maximum limit.
-- Char(n) is rarely recommended because padding can cause subtle bugs and wasted space.
-- Varchar(n) is preferred for almost all real‑world text fields.
+- CHAR(n) always stores fixed‑length strings, padding with spaces if needed.
+- VARCHAR(n) stores variable‑length strings up to a maximum LIMIT.
+- CHAR(n) IS rarely recommended because padding can cause subtle bugs AND wasted space.
+- VARCHAR(n) IS preferred for almost ALL REAL‑world TEXT fields.
 
 Similarities:
 
 - Both enforce a maximum length (n).
-- Both are SQL‑standard and fully supported by PostgreSQL.
-- Both store textual data and support the same operators and collations.
+- Both are SQL‑standard AND fully supported BY PostgreSQL.
+- Both store textual data AND support the same operators AND collations.
 
 Differences:
 
-- Char(n) pads values with spaces; varchar(n) does not.
-- Char(n) always uses the full allocated length; varchar(n) uses only what it needs.
-- Char(n) can cause unexpected comparison behavior due to trailing spaces.
-- Varchar(n) is more flexible and efficient for most use cases.
+- CHAR(n) pads VALUES with spaces; VARCHAR(n) does NOT.
+- CHAR(n) always uses the full allocated length; VARCHAR(n) uses only what it needs.
+- CHAR(n) can cause unexpected comparison behavior due to trailing spaces.
+- VARCHAR(n) IS more flexible AND efficient for most use cases.
 
 </br>
 
-## 🎭 Boolean Types
+## 🎭 BOOLEAN Types
 
-### 1. Boolean - PostgreSQL
+### 1. BOOLEAN - PostgreSQL
 
-| Type                               | Description                                |
+| TYPE                               | Description                                |
 |:-----------------------------------|:-------------------------------------------|
-| `boolean`                          | Logical value: TRUE, FALSE, or NULL        |
+| `BOOLEAN`                          | Logical value: TRUE, FALSE, OR NULL        |
 
 </br>
 
-### 2. Boolean - Standard x PostgreSQL
+### 2. BOOLEAN - Standard x PostgreSQL
 
 | Standard SQL             | PostgreSQL                                                | Notes                                        |
 |:-------------------------|:----------------------------------------------------------|:---------------------------------------------|
-| `boolean`                | `boolean`                                                 | Fully compatible; supports true, false, null |
-| (no other boolean types) | PostgreSQL accepts shorthand values (t, f, 1, 0, yes, no) | Convenience extensions                       |
+| `BOOLEAN`                | `BOOLEAN`                                                 | Fully compatible; supports TRUE, FALSE, NULL |
+| (no other BOOLEAN types) | PostgreSQL accepts shorthand VALUES (t, f, 1, 0, yes, no) | Convenience extensions                       |
 
 </br>
 
-### 3. Boolean - Example
+### 3. BOOLEAN - Example
 
 ```sql
-create table boolean_examples (
-    is_active      boolean,              -- true, false, or null
-    email_verified boolean not null,     -- must be true or false
-    is_admin       boolean default false -- default value
+CREATE TABLE boolean_examples (
+    is_active      BOOLEAN,              -- TRUE, FALSE, OR NULL
+    email_verified BOOLEAN NOT NULL,     -- must be TRUE OR FALSE
+    is_admin       BOOLEAN DEFAULT FALSE -- DEFAULT value
 );
 
-insert into boolean_examples (is_active, email_verified)
-values
-    (true, false),
-    (false, true),
-    (null, false); -- null represents "unknown" or "not provided"
+INSERT INTO boolean_examples (is_active, email_verified)
+VALUES
+    (TRUE, FALSE),
+    (FALSE, TRUE),
+    (NULL, FALSE); -- NULL represents "unknown" OR "NOT provided"
 
 ```
 
 </br>
 
-## 🗓️ Date & Time
+## 🗓️ DATE & TIME
 
-### 1. Date & Time - PostgreSQL
+### 1. DATE & TIME - PostgreSQL
 
-| Type                                      | Description                                                       |
+| TYPE                                      | Description                                                       |
 |:------------------------------------------|:------------------------------------------------------------------|
-| `date`                                    | Calendar date (year, month, day)                                  |
-| `time`                                    | Time of day (hours, minutes, seconds)                             |
-| `timestamp`                               | Date + time (no timezone awareness)                               |
-| `timestamp with time zone (timestamptz)`  | Date + time with timezone; stored in UTC and converted on display |
-| `interval`                                | A span of time (e.g., 3 days, 2 hours)                            |
+| `DATE`                                    | Calendar DATE (year, month, day)                                  |
+| `TIME`                                    | TIME of day (hours, minutes, seconds)                             |
+| `TIMESTAMP`                               | DATE + TIME (no timezone awareness)                               |
+| `TIMESTAMP WITH TIME ZONE (TIMESTAMPTZ)`  | DATE + TIME with timezone; stored IN UTC AND converted ON display |
+| `INTERVAL`                                | A span of TIME (e.g., 3 days, 2 hours)                            |
 
 </br>
 
-### 2. Date & Time - Standard x PostgreSQL
+### 2. DATE & TIME - Standard x PostgreSQL
 
 | Standard SQL               | PostgreSQL            | Notes                                                         |
 |:---------------------------|:----------------------|:--------------------------------------------------------------|
-| `date`                     | `date`                | Same behavior                                                 |
-| `time`                     | `time`                | Same behavior                                                 |
-| `timestamp`                | `timestamp`           | Same behavior; no timezone                                    |
-| `timestamp with time zone` | `timestamptz`         | PostgreSQL stores in UTC internally                           |
-| `interval`                 | `interval`            | PostgreSQL fully supports SQL standard intervals              |
-| (no standard equivalent)   | `time with time zone` | PostgreSQL supports it, but rarely used                       |
+| `DATE`                     | `DATE`                | Same behavior                                                 |
+| `TIME`                     | `TIME`                | Same behavior                                                 |
+| `TIMESTAMP`                | `TIMESTAMP`           | Same behavior; no timezone                                    |
+| `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ`         | PostgreSQL stores IN UTC internally                           |
+| `INTERVAL`                 | `INTERVAL`            | PostgreSQL fully supports SQL standard intervals              |
+| (no standard equivalent)   | `TIME with TIME zone` | PostgreSQL supports it, but rarely used                       |
 
 </br>
 
-### 3. Date & Time - Example
+### 3. DATE & TIME - Example
 
 ```sql
-create table date_examples (
-    event_date        date,        -- calendar date only
-    event_time        time,        -- time of day
-    created_at        timestamp,   -- date + time (no timezone)
-    created_at_tz     timestamptz, -- date + time with timezone
-    duration_between  interval     -- duration or time span
+CREATE TABLE date_examples (
+    event_date        DATE,        -- calendar DATE only
+    event_time        TIME,        -- TIME of day
+    created_at        TIMESTAMP,   -- DATE + TIME (no timezone)
+    created_at_tz     TIMESTAMPTZ, -- DATE + TIME with timezone
+    duration_between  INTERVAL     -- duration OR TIME span
 );
 
-insert into date_examples (
+INSERT INTO date_examples (
     event_date, event_time, created_at, created_at_tz, duration_between
 )
-values (
-    date '2025-01-15',        -- explicit date literal
-    time '14:30:00',          -- explicit time literal
-    now(),                    -- current timestamp (no timezone)
-    now(),                    -- current timestamp with timezone
-    interval '3 days 4 hours' -- interval literal
+VALUES (
+    DATE '2025-01-15',        -- explicit DATE literal
+    TIME '14:30:00',          -- explicit TIME literal
+    NOW(),                    -- current TIMESTAMP (no timezone)
+    NOW(),                    -- current TIMESTAMP with timezone
+    INTERVAL '3 days 4 hours' -- INTERVAL literal
 );
 ```
 
@@ -316,33 +316,33 @@ values (
 
 Notes:
 
-- Timestamp stores date + time without timezone.
-- Timestamptz stores date + time with timezone, normalized to UTC.
-- Interval stores durations, not points in time.
-- Use timestamptz for almost all real‑world timestamps.
+- TIMESTAMP stores DATE + TIME without timezone.
+- TIMESTAMPTZ stores DATE + TIME with timezone, normalized to UTC.
+- INTERVAL stores durations, NOT points IN TIME.
+- Use TIMESTAMPTZ for almost ALL REAL‑world timestamps.
 
 Similarities:
 
-- Timestamp and timestamptz both store date + time.
-- All support arithmetic operations (e.g., adding intervals).
-- All are SQL‑standard types.
+- TIMESTAMP AND TIMESTAMPTZ both store DATE + TIME.
+- ALL support arithmetic operations (e.g., adding intervals).
+- ALL are SQL‑standard types.
 
 Differences:
 
-- Timestamp does not adjust for timezone; timestamptz does.
-- Timestamptz converts input to UTC and back to the client timezone.
-- Interval cannot represent a specific moment, only a duration.
-- Interval supports units like days, hours, months, etc.
+- TIMESTAMP does NOT adjust for timezone; TIMESTAMPTZ does.
+- TIMESTAMPTZ converts input to UTC AND back to the client timezone.
+- INTERVAL cannot represent a specific moment, only a duration.
+- INTERVAL supports units like days, hours, months, etc.
 
 </br>
 
-## 🖥️ Binary Type
+## 🖥️ Binary TYPE
 
 ### Binary - PostgreSQL
 
-| Type                               | Description                                |
+| TYPE                               | Description                                |
 |:-----------------------------------|:-------------------------------------------|
-| `bytea`                            | Binary data (images, files, blobs)         |
+| `BYTEA`                            | Binary data (images, files, blobs)         |
 
 </br>
 
@@ -350,24 +350,24 @@ Differences:
 
 | Standard SQL                 | PostgreSQL                    | Notes                                                                 |
 |:-----------------------------|:------------------------------|:----------------------------------------------------------------------|
-| `binary(n)`                  | (not supported)               | SQL standard fixed‑length binary; PostgreSQL does not implement it    |
-| `varbinary(n)`               | (not supported)               | SQL standard variable‑length binary; PostgreSQL does not implement it |
-| (no standard equivalent)     | `bytea`                       | PostgreSQL’s binary type; used instead of binary/varbinary            |
-| `blob` (binary large object) | `bytea` or `large object api` | PostgreSQL supports large objects via a separate LO API               |
+| `binary(n)`                  | (NOT supported)               | SQL standard fixed‑length binary; PostgreSQL does NOT implement it    |
+| `varbinary(n)`               | (NOT supported)               | SQL standard variable‑length binary; PostgreSQL does NOT implement it |
+| (no standard equivalent)     | `BYTEA`                       | PostgreSQL’s binary TYPE; used instead of binary/varbinary            |
+| `blob` (binary large object) | `BYTEA` OR `large object api` | PostgreSQL supports large objects via a separate LO API               |
 
 </br>
 
 ### Binary - Example
 
 ```sql
-create table binary_examples (
-    file_name    varchar(255),  -- original file name
-    file_data    bytea,         -- raw binary data
+CREATE TABLE binary_examples (
+    file_name    VARCHAR(255),  -- original file name
+    file_data    BYTEA,         -- raw binary data
 );
 
--- Insert binary data (hex format)
-insert into binary_examples (file_name, file_data)
-values (
+-- INSERT binary data (hex format)
+INSERT INTO binary_examples (file_name, file_data)
+VALUES (
     'example.png',
     '\x89504e470d0a1a0a'  -- png header bytes
 );
@@ -379,10 +379,10 @@ values (
 
 ### JSON - PostgreSQL
 
-| Type                               | Description                                                  |
+| TYPE                               | Description                                                  |
 |:-----------------------------------|:-------------------------------------------------------------|
-| `json`                             | Text‑based json; stored exactly as input                     |
-| `jsonb`                            | Binary‑parsed JSON; faster for queries, indexing, and search |
+| `JSON`                             | TEXT‑based JSON; stored exactly AS input                     |
+| `JSONB`                            | Binary‑parsed JSON; faster for queries, indexing, AND search |
 
 </br>
 
@@ -390,43 +390,43 @@ values (
 
 | Standard SQL               | PostgreSQL           | Notes                                                                      |
 |:---------------------------|:---------------------|:---------------------------------------------------------------------------|
-| `json`                     | `json`               | Standard SQL defines json as a text type; PostgreSQL supports it fully     |
-| (no standard equivalent)   | `jsonb`              | PostgreSQL‑specific binary json format; optimized for indexing and queries |
-| `sql/json path`            | `jsonpath`           | PostgreSQL implements SQL/json path queries (@?, @@)                       |
+| `JSON`                     | `JSON`               | Standard SQL defines JSON AS a TEXT TYPE; PostgreSQL supports it fully     |
+| (no standard equivalent)   | `JSONB`              | PostgreSQL‑specific binary JSON format; optimized for indexing AND queries |
+| `sql/JSON path`            | `jsonpath`           | PostgreSQL implements SQL/JSON path queries (@?, @@)                       |
 
 </br>
 
 ### JSON - Example
 
 ```sql
-create table json_examples (
-    raw_json      json,                    -- stored as text
-    parsed_json   jsonb,                   -- stored in binary form
+CREATE TABLE json_examples (
+    raw_json      JSON,                    -- stored AS TEXT
+    parsed_json   JSONB,                   -- stored IN binary form
 );
 
-insert into json_examples (raw_json, parsed_json)
-values (
+INSERT INTO json_examples (raw_json, parsed_json)
+VALUES (
     '{"name": "Alice", "age": 30}',
     '{"name": "Alice", "age": 30, "skills": ["SQL", "Python"]}'
 );
 
 -- Querying JSONB fields
-select
-    parsed_json->>'name' as name,
-    parsed_json->'skills' as skills_array,
-    parsed_json @> '{"age": 30}' as has_age_30
-from json_examples;
+SELECT
+    parsed_json->>'name' AS name,
+    parsed_json->'skills' AS skills_array,
+    parsed_json @> '{"age": 30}' AS has_age_30
+FROM json_examples;
 ```
 
 </br>
 
-## ♻️ UUID Type
+## ♻️ UUID TYPE
 
 ### UUID - PostgreSQL
 
-| Type                               | Description                                   |
+| TYPE                               | Description                                   |
 |:-----------------------------------|:----------------------------------------------|
-| `uuid`                             | Universally unique identifier (128‑bit value) |
+| `UUID`                             | Universally UNIQUE identifier (128‑bit value) |
 
 </br>
 
@@ -434,30 +434,30 @@ from json_examples;
 
 | Standard SQL             | PostgreSQL                                | Notes                                                                            |
 |:-------------------------|:------------------------------------------|:---------------------------------------------------------------------------------|
-| (no standard type)       | `uuid`                                    | PostgreSQL‑specific type; SQL standard does not define a uuid type               |
-| (workaround: `char(36)`) | `uuid`                                    | In SQL standard, uuids are often stored as strings; PostgreSQL has a native type |
-| (functions not standard) | `gen_random_uuid()`, `uuid_generate_v4()` | PostgreSQL provides functions to generate uuidstimezone                          |
+| (no standard TYPE)       | `UUID`                                    | PostgreSQL‑specific TYPE; SQL standard does NOT define a UUID TYPE               |
+| (workaround: `CHAR(36)`) | `UUID`                                    | IN SQL standard, uuids are often stored AS strings; PostgreSQL has a native TYPE |
+| (functions NOT standard) | `gen_random_uuid()`, `uuid_generate_v4()` | PostgreSQL provides functions to generate uuidstimezone                          |
 
 </br>
 
 ### UUID - Example
 
 ```sql
-create extension if not exists "uuid-ossp"; -- enables uuid_generate_v4()
+CREATE EXTENSION IF NOT EXISTS "UUID-ossp"; -- enables uuid_generate_v4()
 
-create table uuid_examples (
-    id_uuid      uuid default uuid_generate_v4() primary key,
-    session_id   uuid default gen_random_uuid(), -- requires pgcrypto
-    description  text
+CREATE TABLE uuid_examples (
+    id_uuid      UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    session_id   UUID DEFAULT gen_random_uuid(), -- requires pgcrypto
+    description  TEXT
 );
 
--- Insert with auto-generated UUIDs
-insert into uuid_examples (description)
-values ('First record'), ('Second record');
+-- INSERT with auto-generated UUIDs
+INSERT INTO uuid_examples (description)
+VALUES ('First record'), ('Second record');
 
--- Insert with explicit UUID
-insert into uuid_examples (id_uuid, description)
-values ('550e8400-e29b-41d4-a716-446655440000', 'Custom UUID');
+-- INSERT with explicit UUID
+INSERT INTO uuid_examples (id_uuid, description)
+VALUES ('550e8400-e29b-41d4-a716-446655440000', 'Custom UUID');
 
 ```
 
@@ -467,27 +467,27 @@ values ('550e8400-e29b-41d4-a716-446655440000', 'Custom UUID');
 
 ### Arrays - PostgreSQL
 
-| Type                      | Description                                         |
+| TYPE                      | Description                                         |
 |:--------------------------|:----------------------------------------------------|
-| `smallint[]`              | Array of small integers                             |
-| `integer[]` / `int[]`     | Array of 32‑bit integers                            |
-| `bigint[]`                | Array of 64‑bit integers                            |
-| `numeric[]` / `decimal[]` | Array of exact decimals                             |
-| `real[]`                  | Array of 32‑bit floats                              |
-| `double precision[]`      | Array of 64‑bit floats                              |
-| `boolean[]`               | Array of TRUE/FALSE values                          |
-| `date[]`                  | Array of calendar dates                             |
-| `time[]`                  | Array of times of day                               |
-| `timestamp[]`             | Array of date+time values                           |
-| `timestamptz[]`           | Array of date+time with timezone                    |
-| `interval[]`              | Array of durations                                  |
-| `text[]`                  | Array of text values                                |
-| `varchar[]`               | Array of variable‑length strings                    |
-| `char[]`                  | Array of fixed‑length strings                       |
-| `uuid[]`                  | Array of universally unique identifiers             |
-| `json[]`                  | Array of JSON text values                           |
-| `jsonb[]`                 | Array of binary JSON values                         |
-| `bytea[]`                 | Array of binary data blobs                          |
+| `SMALLINT[]`              | ARRAY of small integers                             |
+| `INTEGER[]` / `INT[]`     | ARRAY of 32‑bit integers                            |
+| `BIGINT[]`                | ARRAY of 64‑bit integers                            |
+| `NUMERIC[]` / `DECIMAL[]` | ARRAY of exact decimals                             |
+| `REAL[]`                  | ARRAY of 32‑bit floats                              |
+| `DOUBLE PRECISION[]`      | ARRAY of 64‑bit floats                              |
+| `BOOLEAN[]`               | ARRAY of TRUE/FALSE VALUES                          |
+| `DATE[]`                  | ARRAY of calendar dates                             |
+| `TIME[]`                  | ARRAY of times of day                               |
+| `TIMESTAMP[]`             | ARRAY of DATE+TIME VALUES                           |
+| `TIMESTAMPTZ[]`           | ARRAY of DATE+TIME with timezone                    |
+| `INTERVAL[]`              | ARRAY of durations                                  |
+| `TEXT[]`                  | ARRAY of TEXT VALUES                                |
+| `VARCHAR[]`               | ARRAY of variable‑length strings                    |
+| `CHAR[]`                  | ARRAY of fixed‑length strings                       |
+| `UUID[]`                  | ARRAY of universally UNIQUE identifiers             |
+| `JSON[]`                  | ARRAY of JSON TEXT VALUES                           |
+| `JSONB[]`                 | ARRAY of binary JSON VALUES                         |
+| `BYTEA[]`                 | ARRAY of binary data blobs                          |
 
 </br>
 
@@ -495,96 +495,96 @@ values ('550e8400-e29b-41d4-a716-446655440000', 'Custom UUID');
 
 | Standard SQL                 | PostgreSQL               | Notes                                                                                  |
 |:-----------------------------|:-------------------------|:---------------------------------------------------------------------------------------|
-| (no standard equivalent)     | `array[]`                | PostgreSQL supports arrays natively; SQL standard does not define a general array type |
-| (workaround: separate table) | `array[]`                | In SQL standard, lists are usually modeled with related tables                         |
-| (extensions)                 | `anyarray`, `anyelement` | PostgreSQL provides polymorphic array types for functions                              |
+| (no standard equivalent)     | `ARRAY[]`                | PostgreSQL supports arrays natively; SQL standard does NOT define a general ARRAY TYPE |
+| (workaround: separate TABLE) | `ARRAY[]`                | IN SQL standard, lists are usually modeled with related tables                         |
+| (extensions)                 | `ANYARRAY`, `ANYELEMENT` | PostgreSQL provides polymorphic ARRAY types for functions                              |
 
 </br>
 
 ### Arrays PostgreSQL - Examples
 
 ```sql
-create table array_examples (
-    id              serial primary key,
-    numbers         integer[],        -- array of integers
-    prices          numeric(10,2)[],  -- array of decimals
-    flags           boolean[],        -- array of booleans
-    dates           date[],           -- array of dates
-    timestamps      timestamptz[],    -- array of timestamps with timezone
-    tags            text[],           -- array of text values
-    identifiers     uuid[],           -- array of uuids
-    json_data       jsonb[]           -- array of jsonb documents
+CREATE TABLE array_examples (
+    id              SERIAL PRIMARY KEY,
+    numbers         INTEGER[],        -- ARRAY of integers
+    prices          NUMERIC(10,2)[],  -- ARRAY of decimals
+    flags           BOOLEAN[],        -- ARRAY of booleans
+    dates           DATE[],           -- ARRAY of dates
+    timestamps      TIMESTAMPTZ[],    -- ARRAY of timestamps with timezone
+    tags            TEXT[],           -- ARRAY of TEXT VALUES
+    identifiers     UUID[],           -- ARRAY of uuids
+    json_data       JSONB[]           -- ARRAY of JSONB documents
 );
 
--- Insert arrays using curly braces
-insert into array_examples (numbers, prices, flags, dates, tags, identifiers, json_data)
-values (
+-- INSERT arrays using curly braces
+INSERT INTO array_examples (numbers, prices, flags, dates, tags, identifiers, json_data)
+VALUES (
     '{1,2,3,4}', 
     '{10.50,20.75,30.00}', 
     '{TRUE,FALSE,TRUE}', 
     '{2025-01-01,2025-01-15}', 
     '{"postgresql","arrays","docs"}',
     '{"550e8400-e29b-41d4-a716-446655440000","123e4567-e89b-12d3-a456-426614174000"}',
-    '{"{\"key\":\"value1\"}","{\"key\":\"value2\"}"}'
+    '{"{\"KEY\":\"value1\"}","{\"KEY\":\"value2\"}"}'
 );
 ```
 
 ```sql
-create table array_examples (
-    numbers     integer[],   -- array of integers
-    tags        text[],      -- array of text values
+CREATE TABLE array_examples (
+    numbers     INTEGER[],   -- ARRAY of integers
+    tags        TEXT[],      -- ARRAY of TEXT VALUES
 );
 
--- Insert arrays using curly braces
-insert into array_examples (numbers, tags)
-values (
+-- INSERT arrays using curly braces
+INSERT INTO array_examples (numbers, tags)
+VALUES (
     '{1,2,3,4,5}', 
     '{"postgresql","arrays","docs"}'
 );
 
--- Query array elements
-select
-    numbers[1] as first_number,   -- access first element
-    tags[2]    as second_tag      -- access second element
-from array_examples;
+-- Query ARRAY elements
+SELECT
+    numbers[1] AS first_number,   -- access first element
+    tags[2]    AS second_tag      -- access second element
+FROM array_examples;
 
--- Check if array contains a value
-select *
-from array_examples
-where 'postgresql' = any(tags);
+-- CHECK if ARRAY contains a value
+SELECT *
+FROM array_examples
+WHERE 'postgresql' = ANY(tags);
 ```
 
 </br>
 
 ## 🃏 PostgreSQL Special Types
 
-| Type     | Description                                        |
+| TYPE     | Description                                        |
 |:---------|:---------------------------------------------------|
-| `enum`   | Custom enumerated values defined by the user       |
-| `cidr`   | Network address with subnet (e.g., 192.168.0.0/24) |
-| `inet`   | IP address (IPv4 or IPv6), with or without subnet  |
-| `point`  | Geometric point ((x, y))                           |
-| `line`   | Infinite geometric line                            |
-| `circle` | Circle defined by center point and radius          |
+| `ENUM`   | Custom enumerated VALUES defined BY the user       |
+| `CIDR`   | Network address with subnet (e.g., 192.168.0.0/24) |
+| `INET`   | IP address (IPv4 OR IPv6), with OR without subnet  |
+| `POINT`  | Geometric POINT ((x, y))                           |
+| `LINE`   | Infinite geometric LINE                            |
+| `CIRCLE` | CIRCLE defined BY center POINT AND radius          |
 
 </br>
 
 ### Special Types - Example
 
 ```sql
--- ENUM type creation
-create type mood as enum ('happy', 'sad', 'neutral');
+-- ENUM TYPE creation
+CREATE TYPE mood AS ENUM ('happy', 'sad', 'neutral');
 
-create table special_examples (
+CREATE TABLE special_examples (
     current_mood   mood,   -- custom enumeration
-    ip_address     inet,   -- ipv4 or ipv6
-    network_block  cidr,   -- network with subnet
-    location_point point,  -- (x, y)
-    path_line      line,   -- infinite line
-    area_circle    circle  -- <(x, y), radius>
+    ip_address     INET,   -- ipv4 OR ipv6
+    network_block  CIDR,   -- network with subnet
+    location_point POINT,  -- (x, y)
+    path_line      LINE,   -- infinite LINE
+    area_circle    CIRCLE  -- <(x, y), radius>
 );
 
-insert into special_examples (
+INSERT INTO special_examples (
     current_mood,
     ip_address,
     network_block,
@@ -592,13 +592,13 @@ insert into special_examples (
     path_line,
     area_circle
 )
-values (
+VALUES (
     'happy',
     '192.168.1.10',
     '192.168.1.0/24',
     '(10.5, 20.3)',
-    '{1, -1, 0}',     -- line in Ax + By + C = 0 form
-    '<(5,5), 3>'      -- circle with center (5,5) and radius 3
+    '{1, -1, 0}',     -- LINE IN Ax + BY + C = 0 form
+    '<(5,5), 3>'      -- CIRCLE with center (5,5) AND radius 3
 );
 ```
 
@@ -609,22 +609,22 @@ values (
 Notes:
 
 - Both store IP addresses.
-- inet stores a single host address (IPv4 or IPv6).
-- cidr stores a network block (address + subnet).
-- PostgreSQL provides operators for subnet containment and comparison.
+- INET stores a single host address (IPv4 OR IPv6).
+- CIDR stores a network block (address + subnet).
+- PostgreSQL provides operators for subnet containment AND comparison.
 
 Similarities:
 
-- Both support IPv4 and IPv6.
+- Both support IPv4 AND IPv6.
 - Both support subnet masks.
-- Both support indexing and network operators (<<, >>, <<=, etc.).
+- Both support indexing AND network operators (<<, >>, <<=, etc.).
 
 Differences:
 
-- inet can store an address with or without a subnet.
-- cidr requires a subnet (e.g., /24).
-- cidr enforces network rules; inet does not.
-- cidr is ideal for network ranges; inet for individual hosts.
+- INET can store an address with OR without a subnet.
+- CIDR requires a subnet (e.g., /24).
+- CIDR enforces network rules; INET does NOT.
+- CIDR IS ideal for network ranges; INET for individual hosts.
 
 </br>
 
@@ -633,20 +633,20 @@ Differences:
 Notes:
 
 - These are PostgreSQL geometric types.
-- Useful for spatial calculations, mapping, and geometric modeling.
-- PostgreSQL supports geometric operators like distance, intersection, and containment.
+- Useful for spatial calculations, mapping, AND geometric modeling.
+- PostgreSQL supports geometric operators like distance, intersection, AND containment.
 
 Similarities:
 
-- All represent geometric shapes.
-- All support geometric operators (<->, @>, &&, etc.).
-- All are PostgreSQL‑specific (not SQL standard).
+- ALL represent geometric shapes.
+- ALL support geometric operators (<->, @>, &&, etc.).
+- ALL are PostgreSQL‑specific (NOT SQL standard).
 
 Differences:
 
-- point represents a coordinate pair (x, y).
-- line represents an infinite line in the plane.
-- circle represents a center point + radius.
-- circle supports area and containment operations; point and line do not.
+- POINT represents a coordinate pair (x, y).
+- LINE represents an infinite LINE IN the plane.
+- CIRCLE represents a center POINT + radius.
+- CIRCLE supports area AND containment operations; POINT AND LINE do NOT.
 
 </br>
