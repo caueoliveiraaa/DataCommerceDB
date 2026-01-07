@@ -1,7 +1,7 @@
-# PostgreSQL & SQL: Transaction Control (TCL)
+# PostgreSQL & SQL: TRANSACTION Control (TCL)
 
-This documentation provides an overview of the Transaction Control Language (TCL) commands available in standard SQL and PostgreSQL.</br>
-It highlights how they work, how they differ, and when to use each one. Practical examples are included to help you understand their behavior in real database designs.
+This documentation provides an overview of the TRANSACTION Control Language (TCL) commands available IN standard SQL AND PostgreSQL.</br>
+It highlights how they work, how they differ, AND WHEN to use each one. Practical examples are included to help you understand their behavior IN REAL database designs.
 
 ## ▶️ COMMIT
 
@@ -9,31 +9,31 @@ It highlights how they work, how they differ, and when to use each one. Practica
 
 | Command     | Description                                                                  |
 |:------------|:-----------------------------------------------------------------------------|
-| `commit`    | Ends the current transaction and makes all changes permanent in the database |
+| `COMMIT`    | Ends the current TRANSACTION AND makes ALL changes permanent IN the database |
 
 ### 2. COMMIT – Standard x PostgreSQL
 
 | Standard SQL  | PostgreSQL  | Notes                                                                  |
 |:--------------|:------------|:-----------------------------------------------------------------------|
-| `commit`      | `commit`    | Same in both; ensures durability of changes once transaction is closed |
+| `COMMIT`      | `COMMIT`    | Same IN both; ensures durability of changes once TRANSACTION IS closed |
 
 ### 3. COMMIT - Example
 
 ```sql
-begin;
+BEGIN;
 
-insert into customers (id, name)
-values (1, 'Alice');
+INSERT INTO customers (id, name)
+VALUES (1, 'Alice');
 
-update accounts 
-set balance = balance - 100
-where customer_id = 1;
+UPDATE accounts 
+SET balance = balance - 100
+WHERE customer_id = 1;
 
--- Make all changes permanent
-commit;
+-- Make ALL changes permanent
+COMMIT;
 
--- after commit, the new customer and balance update are permanently stored
--- the begin keyword must be paired with commit and rollback, to avoid locks or unexpected behavior and close the transaction.
+-- after COMMIT, the new customer AND balance UPDATE are permanently stored
+-- the BEGIN keyword must be paired with COMMIT AND ROLLBACK, to avoid locks OR unexpected behavior AND close the TRANSACTION.
 ```
 
 ## ▶️ ROLLBACK
@@ -42,30 +42,30 @@ commit;
 
 | Command     | Description                                                                   |
 |:------------|:------------------------------------------------------------------------------|
-| `rollback`  | Undoes all changes made in the current transaction, restoring the prior state |
+| `ROLLBACK`  | Undoes ALL changes made IN the current TRANSACTION, restoring the prior state |
 
 ### 2. ROLLBACK – Standard x PostgreSQL
 
 | Standard SQL  | PostgreSQL  | Notes                                                                   |
 |:--------------|:------------|:------------------------------------------------------------------------|
-| `rollback`    | `rollback`  | Same in both; cancels all operations since the last commit or savepoint |
+| `ROLLBACK`    | `ROLLBACK`  | Same IN both; cancels ALL operations since the last COMMIT OR SAVEPOINT |
 
 ### 3. ROLLBACK - Example
 
 ```sql
-begin;
+BEGIN;
 
-insert into customers (id, name)
-values (2, 'Gabriel');
+INSERT INTO customers (id, name)
+VALUES (2, 'Gabriel');
 
-update accounts 
-set balance = balance - 200
-where customer_id = 2;
+UPDATE accounts 
+SET balance = balance - 200
+WHERE customer_id = 2;
 
--- cancel all changes made in this transaction
-rollback;
+-- cancel ALL changes made IN this TRANSACTION
+ROLLBACK;
 
--- the insert and update are undone; the database returns to its prior state
+-- the INSERT AND UPDATE are undone; the database returns to its prior state
 ```
 
 ## ▶️ SAVEPOINT
@@ -74,33 +74,33 @@ rollback;
 
 | Command        | Description                                                           |
 |:---------------|:----------------------------------------------------------------------|
-| `savepoint sp` | Defines a point within a transaction to which you can later roll back |
+| `SAVEPOINT sp` | Defines a POINT within a TRANSACTION to which you can later roll back |
 
 ### 2. SAVEPOINT – Standard x PostgreSQL
 
 | Standard SQL  | PostgreSQL  | Notes                                                      |
 |:--------------|:------------|:-----------------------------------------------------------|
-| `savepoint`   | `savepoint` | Same in both; allows partial rollback within a transaction |
+| `SAVEPOINT`   | `SAVEPOINT` | Same IN both; allows partial ROLLBACK within a TRANSACTION |
 
 ### 3. SAVEPOINT - Example
 
 ```sql
-begin;
+BEGIN;
 
-insert into orders (id, product)
-values (101, 'Laptop');
+INSERT INTO orders (id, product)
+VALUES (101, 'Laptop');
 
-savepoint spl;
+SAVEPOINT spl;
 
-insert into orders (id, product)
-values (102, 'Phone');
+INSERT INTO orders (id, product)
+VALUES (102, 'Phone');
 
--- roll back only to the savepoint, undoing the second insert
-rollback to spl;
+-- roll back only to the SAVEPOINT, undoing the second INSERT
+ROLLBACK TO spl;
 
-commit;
+COMMIT;
 
--- the laptop order remains, but the phone order is discarded
+-- the laptop ORDER remains, but the phone ORDER IS discarded
 ```
 
 ## ▶️ RELEASE SAVEPOINT
@@ -109,231 +109,231 @@ commit;
 
 | Command                | Description                                                                |
 |:-----------------------|:---------------------------------------------------------------------------|
-| `release savepoint sp` | Removes a previously defined savepoint, making it unavailable for rollback |
+| `RELEASE SAVEPOINT sp` | Removes a previously defined SAVEPOINT, making it unavailable for ROLLBACK |
 
 ### 2. RELEASE SAVEPOINT – Standard x PostgreSQL
 
 | Standard SQL        | PostgreSQL          | Notes                                                    |
 |:--------------------|:--------------------|:---------------------------------------------------------|
-| `release savepoint` | `release savepoint` | Same in both; PostgreSQL fully supports the SQL standard |
+| `RELEASE SAVEPOINT` | `RELEASE SAVEPOINT` | Same IN both; PostgreSQL fully supports the SQL standard |
 
 ### 3. RELEASE SAVEPOINT - Example
 
 ```sql
-begin;
+BEGIN;
 
-insert into orders (id, product)
-values (201, 'Tablet');
+INSERT INTO orders (id, product)
+VALUES (201, 'Tablet');
 
-savepoint sp2;
+SAVEPOINT sp2;
 
--- once released, you cannot rool back to sp2 anymore
-release savepoint sp2;
+-- once released, you cannot roll back to sp2 anymore
+RELEASE SAVEPOINT sp2;
 
-commit;
+COMMIT;
 
--- the savepoint is removed; transaction continues normally
+-- the SAVEPOINT IS removed; TRANSACTION continues normally
 ```
 
 ## ▶️ SET TRANSACTION
 
 ### 1. SET TRANSACTION – PostgreSQL
 
-The ***set transaction*** command defines the behavior of the current transaction in terms of:
+The ***SET TRANSACTION*** command defines the behavior of the current TRANSACTION IN terms of:
 
-- Isolation level: How much the transaction is protected from changes made by other concurrent transactions.
-- Read/Write mode: Whether the transaction can modify data or is restricted to reading only.
+- Isolation level: How much the TRANSACTION IS protected FROM changes made BY other concurrent transactions.
+- Read/Write mode: Whether the TRANSACTION can modify data OR IS restricted to reading only.
 
-It must be issued right after begin, before executing queries.</br>
-Once queries run, you cannot change isolation or read/write mode for that transaction.
+It must be issued right after BEGIN, before executing queries.</br>
+Once queries run, you cannot change isolation OR read/write mode for that TRANSACTION.
 
 | Command                                | Description                                                                                      |
 |:---------------------------------------|:-------------------------------------------------------------------------------------------------|
-| `set transaction isolation level ...`  | Sets isolation level for the current transaction (read committed, repeatable read, serializable) |
-| `set transaction read write`           | Allows both read and write operations                                                            |
-| `set transaction read only`            | Restricts the transaction to read-only queries (no data modifications allowed).                  |
+| `SET TRANSACTION isolation level ...`  | Sets isolation level for the current TRANSACTION (read committed, repeatable read, SERIALIZABLE) |
+| `SET TRANSACTION read write`           | Allows both read AND write operations                                                            |
+| `SET TRANSACTION read only`            | Restricts the TRANSACTION to read-only queries (no data modifications allowed).                  |
 
 ### 2. READ COMMITED (DEFAULT)
 
 - Each statement sees only data that was commited before it started.
-- Other transactions' commits become visible immediately in subsequent statements.
+- Other transactions' commits become visible immediately IN subsequent statements.
 
 Senario:
 
 - Two users are checking account balances
-- Transaction A reads balance = 100
-- Transaction B deposits +50 and commits
-- Transaction A runs another query and now sees balance = 150
+- TRANSACTION A reads balance = 100
+- TRANSACTION B deposits +50 AND commits
+- TRANSACTION A runs another query AND now sees balance = 150
 
 Example:
 
 ```sql
-begin;
+BEGIN;
 
-set transaction isolation level read commited;
+SET TRANSACTION isolation level read commited;
 
 -- first query sees old balance
-select balance
-from accounts 
-where id = 1; -- returns 100
+SELECT balance
+FROM accounts 
+WHERE id = 1; -- returns 100
 
--- meanwhile, another transaction commits a deposit of 50
+-- meanwhile, another TRANSACTION commits a deposit of 50
 
 -- second query sees updated balance
-select balance
-from accounts 
-where id = 1; -- returns 150
+SELECT balance
+FROM accounts 
+WHERE id = 1; -- returns 150
 
-commit;
+COMMIT;
 
--- useful when you want fresh data visibility but can tolerate changes between queries
+-- useful WHEN you want fresh data visibility but can tolerate changes between queries
 ```
 
 ### 3. REPEATABLE READ
 
-- Ensures all quries in the transaction see a consistent snapshot
+- Ensures ALL quries IN the TRANSACTION see a consistent snapshot
 - Prevents non-repeatable reads (same query always returns same result)
-- But phantom rows (new rows added by others) may still appear in range queries
-- A range query is a query that retrieves rows where a column’s value falls within a specified range of values (ex: using between)
+- But phantom rows (new rows added BY others) may still appear IN range queries
+- A range query IS a query that retrieves rows WHERE a column’s value falls within a specified range of VALUES (ex: using between)
 
 Senario
 
-- Transaction A checks all customers with balance > 100
-- Transaction B inserts a new customer with balance 200 and commits
-- Transaction A repeats the query; still sees the same original set (no new row)
+- TRANSACTION A checks ALL customers with balance > 100
+- TRANSACTION B inserts a new customer with balance 200 AND commits
+- TRANSACTION A repeats the query; still sees the same original SET (no new row)
 
 Example:
 
 ```sql
-begin;
+BEGIN;
 
-set transaction isolation level repeatable read;
+SET TRANSACTION isolation level repeatable read;
 
 -- snapshot taken here
-select *
-from customers
-where balance > 100; -- returns 3 rows
+SELECT *
+FROM customers
+WHERE balance > 100; -- returns 3 rows
 
--- another transaction inserts a new customer with balance 200
+-- another TRANSACTION inserts a new customer with balance 200
 
 -- still sees same snapshot
-select *
-from customers
-where balance > 100; -- still returns 3 rows
+SELECT *
+FROM customers
+WHERE balance > 100; -- still returns 3 rows
 
-commit;
+COMMIT;
 
--- useful when you need stable results across multiple queries in one transaction
+-- useful WHEN you need stable results across multiple queries IN one TRANSACTION
 ```
 
 ### 4. SERIALIZABLE
 
-- Strictest level: transactions behave as if executed one after another
+- Strictest level: transactions behave AS if executed one after another
 - Prevents anomalies like phantom rows
 - May cause rollbacks if concurrent transactions conflict
 
 Senario
 
 - Two users transfer money simultaneously
-- Both transactions try to withdraw from the same account
-- PostgreSQL detects conflict; one transaction is rolled back to preserve serial order
+- Both transactions try to withdraw FROM the same account
+- PostgreSQL detects conflict; one TRANSACTION IS rolled back to preserve SERIAL ORDER
 
 Example:
 
 ```sql
-begin;
-set transaction isolation level serializable;
+BEGIN;
+SET TRANSACTION isolation level SERIALIZABLE;
 
 -- attempt to withdraw
-update accounts set balance = balance - 100 where id = 1;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
 
--- if another concurrent transaction also withdraws, one will fail
-commit;
+-- if another concurrent TRANSACTION also withdraws, one will fail
+COMMIT;
 
--- best for financial operations where correctness is critical, even if performance suffers
+-- best for financial operations WHERE correctness IS critical, even if performance suffers
 ```
 
 ### 5. READ WRITE
 
-- Default mode
-- Allows insert, update, delete, and select.
+- DEFAULT mode
+- Allows INSERT, UPDATE, DELETE, AND SELECT.
 
 Example:
 
 ```sql
-begin;
-set transaction read write;
+BEGIN;
+SET TRANSACTION read write;
 
-update accounts
-set balance = balance - 50
-where id = 1;
+UPDATE accounts
+SET balance = balance - 50
+WHERE id = 1;
 
-insert into transactions (id, account_id, amount) 
-values (101, 1, -50);
+INSERT INTO transactions (id, account_id, amount) 
+VALUES (101, 1, -50);
 
-commit;
+COMMIT;
 ```
 
 ### 6. READ ONLY
 
-- Restricts transaction to queries that do not modify data
-- Useful for reporting, analytics, or ensuring accidental writes don’t happen
+- Restricts TRANSACTION to queries that do NOT modify data
+- Useful for reporting, analytics, OR ensuring accidental writes don’t happen
 
 Example:
 
 ```sql
-begin;
-set transaction read only;
+BEGIN;
+SET TRANSACTION read only;
 
 -- allowed
-select * from accounts where balance > 1000;
+SELECT * FROM accounts WHERE balance > 1000;
 
--- not allowed → error
-update accounts set balance = balance - 50 where id = 1;
+-- NOT allowed → error
+UPDATE accounts SET balance = balance - 50 WHERE id = 1;
 
-commit;
+COMMIT;
 ```
 
 ### 5. SET TRANSACTION – Standard x PostgreSQL
 
 | Standard SQL      | PostgreSQL        | Notes                                                    |
 |:------------------|:------------------|:---------------------------------------------------------|
-| `set transaction` | `set transaction` | Same in both; PostgreSQL fully supports the SQL standard |
+| `SET TRANSACTION` | `SET TRANSACTION` | Same IN both; PostgreSQL fully supports the SQL standard |
 
 ### 6. SET TRANSACTION - Final example
 
 ```sql
-begin;
-set transaction isolation level serializable;
-set transaction read only;
+BEGIN;
+SET TRANSACTION isolation level SERIALIZABLE;
+SET TRANSACTION read only;
 
--- this query will run a read-only, serializable transaction
-select *
-from accounts
-where balance > 1000;
+-- this query will run a read-only, SERIALIZABLE TRANSACTION
+SELECT *
+FROM accounts
+WHERE balance > 1000;
 
-commit;
+COMMIT;
 
--- ensures the transaction cannot modify data and uses the strictest isolation
+-- ensures the TRANSACTION cannot modify data AND uses the strictest isolation
 ```
 
 ## ▶️ SET CONSTRAINTS
 
-The ***set constraints*** command controls when constraints are checked during a transaction.</br>
-This is specially useful with ***deferred constraints***, which can be postponed until commit.</br>
-They can be placed anywhere inside the transaction, but it only affects subsequent statements.
+The ***SET CONSTRAINTS*** command controls WHEN constraints are checked during a TRANSACTION.</br>
+This IS specially useful with ***deferred constraints***, which can be postponed until COMMIT.</br>
+They can be placed anywhere inside the TRANSACTION, but it only affects subsequent statements.
 
 ### 1. SET CONSTRAINTS – PostgreSQL
 
 | Command                                | Description                                                              |
 |:---------------------------------------|:-------------------------------------------------------------------------|
-| `set constraints all deferred`         | Defers checking of constraints until transaction commit                  |
-| `set constraints constraint_name ...`  | Controls when specific constraints are enforced (immediate or deferred)  |
+| `SET CONSTRAINTS ALL deferred`         | Defers checking of constraints until TRANSACTION COMMIT                  |
+| `SET CONSTRAINTS constraint_name ...`  | Controls WHEN specific constraints are enforced (immediate OR deferred)  |
 
 Modes:
 
-- immediate: Constraint is checked right after each statement.
-- deferred: Constraint is checked only at transaction commit.
+- immediate: CONSTRAINT IS checked right after each statement.
+- deferred: CONSTRAINT IS checked only at TRANSACTION COMMIT.
 
 Only deferrable constraints (declared with deferrable) can be deferred.</br>
 Non-deferrable constraints are always checked immediately.
@@ -342,27 +342,27 @@ Non-deferrable constraints are always checked immediately.
 
 | Standard SQL      | PostgreSQL        | Notes                                                                        |
 |:------------------|:------------------|:-----------------------------------------------------------------------------|
-| `set constraints` | `set constraints` | Same in both; PostgreSQL supports deferred and immediate constraint checking |
+| `SET CONSTRAINTS` | `SET CONSTRAINTS` | Same IN both; PostgreSQL supports deferred AND immediate CONSTRAINT checking |
 
 Best Practices:
 
-- Use deferred constraints when inserting related rows in different tables within the same transaction.
-- Use immediate constraints when you want validation at each step.
+- Use deferred constraints WHEN inserting related rows IN different tables within the same TRANSACTION.
+- Use immediate constraints WHEN you want validation at each step.
 
 ### 3. SET CONSTRAINTS - Example
 
 ```sql
-begin;
-set constraint all deferred;
+BEGIN;
+SET CONSTRAINT ALL deferred;
 
-insert into orders (id, customer_id) -- customer doesn’t exist yet
-values (301, 999);
+INSERT INTO orders (id, customer_id) -- customer doesn’t exist yet
+VALUES (301, 999);
 
-insert into customers (id, name)
-values (999, 'Charlie');
+INSERT INTO customers (id, name)
+VALUES (999, 'Charlie');
 
--- constraints checked deferred unit commit, so both inserts succeed
-commit;
+-- constraints checked deferred until COMMIT, so both inserts succeed
+COMMIT;
 ```
 
 ## ▶️ PRACTICAL EXAMPLES
@@ -370,82 +370,82 @@ commit;
 ### Banking transfer
 
 ```sql
-begin;
-set transaction isolation level repeatable read;
+BEGIN;
+SET TRANSACTION isolation level repeatable read;
 
-update accounts
-set balance = balance - 500
-where id = 1;
+UPDATE accounts
+SET balance = balance - 500
+WHERE id = 1;
 
-savepoint after_debit;
+SAVEPOINT after_debit;
 
-update accounts
-set balance = balance + 500
-where id = 2;
+UPDATE accounts
+SET balance = balance + 500
+WHERE id = 2;
 
--- if credit fails, rollback only to after_debit
-rollback to after_debit;
+-- if credit fails, ROLLBACK only to after_debit
+ROLLBACK TO after_debit;
 
-commit;
+COMMIT;
 ```
 
 ### Inventory management
 
 ```sql
-begin;
+BEGIN;
 
-insert into inventory_log (item_id, action)
-values (10, 'reserved');
-savepoint reserve_item;
+INSERT INTO inventory_log (item_id, action)
+VALUES (10, 'reserved');
+SAVEPOINT reserve_item;
 
-update stock
-set quantity = quantity - 1
-where item_id = 10;
+UPDATE stock
+SET quantity = quantity - 1
+WHERE item_id = 10;
 
--- if stock update fails, rollback to reserve_item
-rollback to reserve_item;
+-- if stock UPDATE fails, ROLLBACK TO reserve_item
+ROLLBACK TO reserve_item;
 
-commit;
+COMMIT;
 ```
 
-### Processing an order with multiple steps
+### Processing an ORDER with multiple steps
 
 ```sql
-begin;
--- set transactions properties
-set transaction isolation level serializable;
-set transaction read write;
+BEGIN;
+-- SET TRANSACTIONs properties
+SET TRANSACTION isolation level SERIALIZABLE;
+SET TRANSACTION read write;
 
--- insert customer and order
-insert into customers (id, name)
-values (1001, 'Alice');
+-- INSERT customer AND ORDER
+INSERT INTO customers (id, name)
+VALUES (1001, 'Alice');
 
-insert into orders (id, customer_id, product)
-values (5001, 1001, 'Laptop');
+INSERT INTO orders (id, customer_id, product)
+VALUES (5001, 1001, 'Laptop');
 
--- defines a savepoint before payment
-savepoint before_payment;
+-- defines a SAVEPOINT before payment
+SAVEPOINT before_payment;
 
--- try to insert payment
-insert into payments (id, order_id, amount) 
-values (9001, 5001, 1200);
+-- try to INSERT payment
+INSERT INTO payments (id, order_id, amount) 
+VALUES (9001, 5001, 1200);
 
--- suppose something goes wrong: rollback only payment 
-rollback to before_payment;
+-- suppose something goes wrong: ROLLBACK only payment 
+ROLLBACK TO before_payment;
 
--- release the savepoint (no longer needed) 
-release savepoint before_payment;
+-- release the SAVEPOINT (no longer needed) 
+RELEASE SAVEPOINT before_payment;
 
--- defer constraints until commit 
-set constraints all deferred;
+-- defer constraints until COMMIT 
+SET CONSTRAINTS ALL deferred;
 
--- insert dependent data out of order 
-insert into orders (id, customer_id, product) 
-values (5002, 9999, 'Phone'); -- customer not yet created
+-- INSERT dependent data out of ORDER 
+INSERT INTO orders (id, customer_id, product) 
+VALUES (5002, 9999, 'Phone'); -- customer NOT yet created
 
-insert into customers (id, name) 
-values (9999, 'Bob');
+INSERT INTO customers (id, name) 
+VALUES (9999, 'Bob');
 
--- finally commit everything 
-commit;
+-- finally COMMIT everything 
+COMMIT;
 ```
