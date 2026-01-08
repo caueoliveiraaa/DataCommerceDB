@@ -68,6 +68,7 @@ The docs/ folder contains Markdown guides that explain SQL concepts step by step
 The schema/ folder contains reusable SQL objects:
 
 - Functions: reusable calculations (e.g., discounts, revenue predictions).
+- Indexes:
 - Procedures: operational tasks (e.g., archiving old orders).
 - Triggers: automatic actions (e.g., updating timestamps).
 - Views: analytical perspectives (e.g., active users, top products).
