@@ -47,7 +47,7 @@ DataCommerceDB/
 ### 🦾 Exercises
 
 The exercises/ folder contains PostgreSQL exercises for learning and practicing SQL with real world problem-solving.</br>
-They can be found on [here](https://pgexercises.com/).
+They can be found on [this website](https://pgexercises.com/).
 
 ### 🗂️ Schema
 
