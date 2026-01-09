@@ -11,20 +11,8 @@ This project was made for educational purposes, therefore it contains some exerc
 ```plaintexct
 DataCommerceDB/
 │
-├── docs/
-│   ├── 01_ddl.md
-│   ├── 02_dml.md
-│   ├── 03_operators.md
-│   ├── 04_data_types.md
-│   ├── 05_functions.md
-│   ├── 06_joins.md
-│   ├── 07_dcl.md
-│   ├── 08_tcl.md
-│   ├── 09_postgres.md
-│   ├── 10_advanced.md
-│   ├── 11_best_practices.md
-│   ├── 12_modelling.md
-│   └── 13_exercises.md
+├── exercises/
+│   └── basic_exercises.md_
 │
 ├── schema/
 │   ├── functions/
@@ -56,19 +44,16 @@ DataCommerceDB/
 
 ## 📄 Structuring Description
 
-### 📘 Docs
+### 🦾 Exercises
 
-The docs/ folder contains Markdown guides that explain SQL concepts step by step:
-
-- From basics like DDL and DML to advanced topics such as modelling and best practices.
-- Includes exercises to practice queries and reinforce learning.
+The exercises/ folder contains PostgreSQL exercises for learning and practicing SQL with real world problem-solving.</br>
+They can be found on [here](https://pgexercises.com/).
 
 ### 🗂️ Schema
 
 The schema/ folder contains reusable SQL objects:
 
 - Functions: reusable calculations (e.g., discounts, revenue predictions).
-- Indexes:
 - Procedures: operational tasks (e.g., archiving old orders).
 - Triggers: automatic actions (e.g., updating timestamps).
 - Views: analytical perspectives (e.g., active users, top products).
