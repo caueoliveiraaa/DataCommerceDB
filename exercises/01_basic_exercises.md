@@ -36,6 +36,36 @@ select * from cd.facilities;
 
 ## 2. Retrieve specific columns from a table
 
+### ℹ️ 2.1 Description
+
+You want to print out a list of all of the facilities and their cost to members. How would you retrieve a list of only facility names and costs?
+
+### ☑️ 2.2 Expected Results
+
+| Name            | Member Cost |
+|-----------------|-------------|
+| Tennis Court 1  | 5           |
+| Tennis Court 2  | 5           |
+| Badminton Court | 0           |
+| Table Tennis    | 0           |
+| Massage Room 1  | 35          |
+| Massage Room 2  | 35          |
+| Squash Court    | 3.5         |
+| Snooker Table   | 0           |
+| Pool Table      | 0           |
+
+### ✅ 2.3 My Solution
+
+```sql
+SELECT name, membercost FROM cd.facilities;
+```
+
+### 🛜 2.4 Website's Solution
+
+```sql
+select name, membercost from cd.facilities;
+```
+
 ## 3. Control which rows are retrieved
 
 ## 4. Control which rows are retrieved - part 2
