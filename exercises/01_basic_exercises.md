@@ -130,7 +130,85 @@ where
     (membercost < monthlymaintenance/50.0);   
 ```
 
+### ❇️ 4.5 Multiply instead of devide
+
+```sql
+SELECT facid, name, membercost, monthlymaintenance
+FROM cd.facilities
+WHERE membercost > 0
+AND membercost * 50 < monthlymaintenance;
+```
+
+### ❇️ 4.6 Use a Common Table Expression (CTE)
+
+```sql
+WITH threshold AS (
+    SELECT facid, name, membercost, monthlymaintenance, monthlymaintenance / 50 AS threshold
+    FROM cd.facilities
+)
+SELECT facid, name, membercost, monthlymaintenance
+FROM threshold
+WHERE membercost > 0
+AND membercost < threshold;
+```
+
 ## 5. Basic string searches
+
+### ℹ️ 5.1 Description
+
+How can you produce a list of all facilities with the word 'Tennis' in their name?
+
+### ☑️ 5.2 Expected Results
+
+| FacID | Name           | Member Cost | Guest Cost | Initial Outlay | Monthly Maintenance |
+|-------|----------------|-------------|------------|----------------|---------------------|
+| 0     | Tennis Court 1 | 5           | 25         | 10000          | 200                 |
+| 1     | Tennis Court 2 | 5           | 25         | 8000           | 200                 |
+| 3     | Table Tennis   | 0           | 5          | 320            | 10                  |
+
+### ✅ 5.3 My Solution
+
+```sql
+SELECT * 
+FROM cd.facilities
+WHERE NAME LIKE '%Tennis%';
+```
+
+### 🛜 5.4 Website's Solution
+
+```sql
+select *
+from cd.facilities 
+where name like '%Tennis%';       
+```
+
+### ❇️ 5.5 Using POSITION or STRPOS (PostgreSQL functions)
+
+```sql
+SELECT *
+FROM cd.facilities
+WHERE POSITION('Tennis' IN name) > 0;
+```
+
+- or
+
+```sql
+SELECT *
+FROM cd.facilities
+WHERE STRPOS(name, 'Tennis') > 0; 
+```
+
+- Returns rows where "Tennis" occurs anywhere in the string.
+
+### ❇️ 5.6 Using Regular Expressions (~ operator in PostgreSQL)
+
+```sql
+SELECT *
+FROM cd.facilities
+WHERE name ~ 'Tennis';
+```
+
+- Powerful if you want more complex pattern matching.
 
 ## 6. Matching against multiple possible values
 
