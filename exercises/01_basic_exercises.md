@@ -198,7 +198,7 @@ FROM cd.facilities
 WHERE STRPOS(name, 'Tennis') > 0; 
 ```
 
-- Returns rows where "Tennis" occurs anywhere in the string.
+👉 Returns rows where "Tennis" occurs anywhere in the string.
 
 ### ❇️ 5.6 Using Regular Expressions (~ operator in PostgreSQL)
 
@@ -208,9 +208,55 @@ FROM cd.facilities
 WHERE name ~ 'Tennis';
 ```
 
-- Powerful if you want more complex pattern matching.
+👉 Powerful if you want more complex pattern matching.
 
 ## 6. Matching against multiple possible values
+
+### ℹ️ 6.1 Description
+
+How can you retrieve the details of facilities with ID 1 and 5? Try to do it without using the OR operator.
+
+### ☑️ 6.2 Expected Results
+
+| facid | name             | membercost | guestcost | initialoutlay | monthlymaintenance |
+|-------|------------------|------------|-----------|---------------|--------------------|
+| 1     | Tennis Court 2   | 5          | 25        | 8000          | 200                |
+| 5     | Massage Room 2   | 35         | 80        | 4000          | 3000               |
+
+### ✅ 6.3 My Solution
+
+```sql
+SELECT * 
+FROM cd.facilities
+WHERE facid IN (1, 5);
+```
+
+### 🛜 6.4 Website's Solution
+
+```sql
+select *
+from cd.facilities 
+where 
+    facid in (1,5);          
+```
+
+### ❇️ 6.5 Using BETWEEN (only works if values are consecutive)
+
+```sql
+SELECT *
+FROM cd.facilities
+WHERE facid BETWEEN 1 AND 5;
+```
+
+⚠️ This will also include facid = 2, 3, 4, so only use if that’s acceptable.
+
+### ❇️ 6.6 Using ANY (PostgreSQL)
+
+```sql
+SELECT *
+FROM cd.facilities
+WHERE facid = ANY (ARRAY[1, 5]);
+```
 
 ## 7. Classify results into buckets
 
