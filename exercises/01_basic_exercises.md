@@ -25,7 +25,8 @@ How can you retrieve all the information from the cd.facilities table?
 ### ✅ 1.3 My Solution
 
 ```sql
-SELECT * FROM cd.facilities
+SELECT *
+FROM cd.facilities
 ```
 
 ### 🛜 1.4 Website's Solution
@@ -57,7 +58,8 @@ You want to print out a list of all of the facilities and their cost to members.
 ### ✅ 2.3 My Solution
 
 ```sql
-SELECT name, membercost FROM cd.facilities;
+SELECT name, membercost
+FROM cd.facilities;
 ```
 
 ### 🛜 2.4 Website's Solution
@@ -68,7 +70,65 @@ select name, membercost from cd.facilities;
 
 ## 3. Control which rows are retrieved
 
+### ℹ️ 3.1 Description
+
+How can you produce a list of facilities that charge a fee to members?
+
+### ☑️ 3.2 Expected Results
+
+| FacID | Name           | Member Cost | Guest Cost | Initial Outlay | Monthly Maintenance |
+|-------|----------------|-------------|------------|----------------|---------------------|
+| 0     | Tennis Court 1 | 5           | 25         | 10000          | 200                 |
+| 1     | Tennis Court 2 | 5           | 25         | 8000           | 200                 |
+| 4     | Massage Room 1 | 35          | 80         | 4000           | 3000                |
+| 5     | Massage Room 2 | 35          | 80         | 4000           | 3000                |
+| 6     | Squash Court   | 3.5         | 17.5       | 5000           | 80                  |
+
+### ✅ 3.3 My Solution
+
+```sql
+SELECT * 
+FROM cd.facilities
+WHERE membercost > 0;
+```
+
+### 🛜 3.4 Website's Solution
+
+```sql
+select * from cd.facilities where membercost > 0;    
+```
+
 ## 4. Control which rows are retrieved - part 2
+
+### ℹ️ 4.1 Description
+
+How can you produce a list of facilities that charge a fee to members, and that fee is less than 1/50th of the monthly maintenance cost? Return the facid, facility name, member cost, and monthly maintenance of the facilities in question.
+
+### ☑️ 4.2 Expected Results
+
+| FacID | Name           | Member Cost | Monthly Maintenance |
+|-------|----------------|-------------|---------------------|
+| 4     | Massage Room 1 | 35          | 3000                |
+| 5     | Massage Room 2 | 35          | 3000                |
+
+### ✅ 4.3 My Solution
+
+```sql
+SELECT facid, name, membercost, monthlymaintenance
+FROM cd.facilities
+WHERE membercost < monthlymaintenance / 50
+AND membercost > 0;
+```
+
+### 🛜 4.4 Website's Solution
+
+```sql
+select facid, name, membercost, monthlymaintenance 
+from cd.facilities 
+where 
+    membercost > 0 and 
+    (membercost < monthlymaintenance/50.0);   
+```
 
 ## 5. Basic string searches
 
