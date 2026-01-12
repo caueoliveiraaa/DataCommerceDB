@@ -260,6 +260,59 @@ WHERE facid = ANY (ARRAY[1, 5]);
 
 ## 7. Classify results into buckets
 
+### ℹ️ 7.1 Description
+
+How can you produce a list of facilities, with each labelled as 'cheap' or 'expensive' depending on if their monthly maintenance cost is more than $100? Return the name and monthly maintenance of the facilities in question.
+
+### ☑️ 7.2 Expected Results
+
+| name             | cost      |
+|------------------|-----------|
+| Tennis Court 1   | expensive |
+| Tennis Court 2   | expensive |
+| Badminton Court  | cheap     |
+| Table Tennis     | cheap     |
+| Massage Room 1   | expensive |
+| Massage Room 2   | expensive |
+| Squash Court     | cheap     |
+| Snooker Table    | cheap     |
+| Pool Table       | cheap     |
+
+### ✅ 7.3 My Solution
+
+```sql
+SELECT name,
+  CASE
+    WHEN monthlymaintenance > 100 THEN 'expensive'
+    ELSE 'cheap'
+  END AS cost
+FROM cd.facilities;
+```
+
+### 🛜 7.4 Website's Solution
+
+```sql
+select name, 
+    case when (monthlymaintenance > 100) then
+        'expensive'
+    else
+        'cheap'
+    end as cost
+from cd.facilities;       
+```
+
+### ❇️ 7.5 Using CASE with shorthand
+
+```sql
+SELECT name,
+    CASE WHEN monthlymaintenance <= 100 THEN 'cheap'
+        ELSE 'expensive'
+    END AS cost
+FROM cd.facilities;
+```
+
+👉 Just flips the condition order.
+
 ## 8. Working with dates
 
 ## 9. Removing duplicates, and ordering results
