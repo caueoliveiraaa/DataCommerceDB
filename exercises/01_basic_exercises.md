@@ -554,3 +554,48 @@ ORDER BY joindate DESC LIMIT 1;
 👉 Reads naturally: “give me the most recent join date.”
 
 ## 12. More aggregation
+
+### ℹ️ 12.1 - Description
+
+You'd like to get the first and last name of the last member(s) who signed up - not just the date. How can you do that?
+
+### ☑️ 12.2 - Expected Results
+
+| firstname | surname | joindate            |
+|-----------|---------|---------------------|
+| Darren    | Smith   | 2012-09-26 18:08:45 |
+
+### ✅ 12.3 - My Solution
+
+```sql
+SELECT firstname, surname, joindate
+FROM cd.members
+ORDER BY joindate DESC
+LIMIT 1;
+```
+
+### 🛜 12.4 - Website's Solution
+
+```sql
+select firstname, surname, joindate
+from cd.members
+where joindate = 
+    (select max(joindate) 
+        from cd.members);  
+```
+
+### ❇️ 12.5 - CTE with MAX
+
+```sql
+WITH latest_date AS (
+    SELECT MAX(joindate) AS max_date
+    FROM cd.members
+)
+SELECT firstname, surname, joindate
+FROM cd.members, latest_date
+WHERE cd.members.joindate = latest_date.max_date;
+```
+
+👉 Same logic as your subquery, but wrapped in a CTE for readability.
+
+---
