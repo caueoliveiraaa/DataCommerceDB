@@ -22,7 +22,7 @@ This category deals with the basics of SQL. It covers select and where clauses, 
 
 ## 1. Retrieve everything from a table
 
-### ℹ️ 1.1 Description
+### ℹ️ 1.1 - Description
 
 How can you retrieve all the information from the cd.facilities table?
 
@@ -40,14 +40,14 @@ How can you retrieve all the information from the cd.facilities table?
 | 7     | Snooker Table   | 0          | 5         | 450           | 15                 |
 | 8     | Pool Table      | 0          | 5         | 400           | 15                 |
 
-### ✅ 1.3 My Solution
+### ✅ 1.3 - My Solution
 
 ```sql
 SELECT *
 FROM cd.facilities
 ```
 
-### 🛜 1.4 Website's Solution
+### 🛜 1.4 - Website's Solution
 
 ```sql
 select * from cd.facilities;    
@@ -55,11 +55,11 @@ select * from cd.facilities;
 
 ## 2. Retrieve specific columns from a table
 
-### ℹ️ 2.1 Description
+### ℹ️ 2.1 - Description
 
 You want to print out a list of all of the facilities and their cost to members. How would you retrieve a list of only facility names and costs?
 
-### ☑️ 2.2 Expected Results
+### ☑️ 2.2 - Expected Results
 
 | Name            | Member Cost |
 |-----------------|-------------|
@@ -73,14 +73,14 @@ You want to print out a list of all of the facilities and their cost to members.
 | Snooker Table   | 0           |
 | Pool Table      | 0           |
 
-### ✅ 2.3 My Solution
+### ✅ 2.3 - My Solution
 
 ```sql
 SELECT name, membercost
 FROM cd.facilities;
 ```
 
-### 🛜 2.4 Website's Solution
+### 🛜 2.4 - Website's Solution
 
 ```sql
 select name, membercost from cd.facilities;
@@ -88,11 +88,11 @@ select name, membercost from cd.facilities;
 
 ## 3. Control which rows are retrieved
 
-### ℹ️ 3.1 Description
+### ℹ️ 3.1 - Description
 
 How can you produce a list of facilities that charge a fee to members?
 
-### ☑️ 3.2 Expected Results
+### ☑️ 3.2 - Expected Results
 
 | FacID | Name           | Member Cost | Guest Cost | Initial Outlay | Monthly Maintenance |
 |-------|----------------|-------------|------------|----------------|---------------------|
@@ -102,7 +102,7 @@ How can you produce a list of facilities that charge a fee to members?
 | 5     | Massage Room 2 | 35          | 80         | 4000           | 3000                |
 | 6     | Squash Court   | 3.5         | 17.5       | 5000           | 80                  |
 
-### ✅ 3.3 My Solution
+### ✅ 3.3 - My Solution
 
 ```sql
 SELECT * 
@@ -110,7 +110,7 @@ FROM cd.facilities
 WHERE membercost > 0;
 ```
 
-### 🛜 3.4 Website's Solution
+### 🛜 3.4 - Website's Solution
 
 ```sql
 select * from cd.facilities where membercost > 0;    
@@ -118,19 +118,19 @@ select * from cd.facilities where membercost > 0;
 
 ## 4. Control which rows are retrieved - part 2
 
-### ℹ️ 4.1 Description
+### ℹ️ 4.1 - Description
 
 How can you produce a list of facilities that charge a fee to members, and that fee is less than 1/50th of the monthly maintenance cost?</br>
 Return the facid, facility name, member cost, and monthly maintenance of the facilities in question.
 
-### ☑️ 4.2 Expected Results
+### ☑️ 4.2 - Expected Results
 
 | FacID | Name           | Member Cost | Monthly Maintenance |
 |-------|----------------|-------------|---------------------|
 | 4     | Massage Room 1 | 35          | 3000                |
 | 5     | Massage Room 2 | 35          | 3000                |
 
-### ✅ 4.3 My Solution
+### ✅ 4.3 - My Solution
 
 ```sql
 SELECT facid, name, membercost, monthlymaintenance
@@ -139,7 +139,7 @@ WHERE membercost < monthlymaintenance / 50
 AND membercost > 0;
 ```
 
-### 🛜 4.4 Website's Solution
+### 🛜 4.4 - Website's Solution
 
 ```sql
 select facid, name, membercost, monthlymaintenance 
@@ -149,7 +149,7 @@ where
     (membercost < monthlymaintenance/50.0);   
 ```
 
-### ❇️ 4.5 Multiply instead of devide
+### ❇️ 4.5 - Multiply instead of devide
 
 ```sql
 SELECT facid, name, membercost, monthlymaintenance
@@ -158,7 +158,7 @@ WHERE membercost > 0
 AND membercost * 50 < monthlymaintenance;
 ```
 
-### ❇️ 4.6 Use a Common Table Expression (CTE)
+### ❇️ 4.6 - Use a Common Table Expression (CTE)
 
 ```sql
 WITH threshold_cte AS (
@@ -173,11 +173,11 @@ AND membercost < threshold;
 
 ## 5. Basic string searches
 
-### ℹ️ 5.1 Description
+### ℹ️ 5.1 - Description
 
 How can you produce a list of all facilities with the word 'Tennis' in their name?
 
-### ☑️ 5.2 Expected Results
+### ☑️ 5.2 - Expected Results
 
 | FacID | Name           | Member Cost | Guest Cost | Initial Outlay | Monthly Maintenance |
 |-------|----------------|-------------|------------|----------------|---------------------|
@@ -185,7 +185,7 @@ How can you produce a list of all facilities with the word 'Tennis' in their nam
 | 1     | Tennis Court 2 | 5           | 25         | 8000           | 200                 |
 | 3     | Table Tennis   | 0           | 5          | 320            | 10                  |
 
-### ✅ 5.3 My Solution
+### ✅ 5.3 - My Solution
 
 ```sql
 SELECT * 
@@ -193,7 +193,7 @@ FROM cd.facilities
 WHERE NAME LIKE '%Tennis%';
 ```
 
-### 🛜 5.4 Website's Solution
+### 🛜 5.4 - Website's Solution
 
 ```sql
 select *
@@ -201,7 +201,7 @@ from cd.facilities
 where name like '%Tennis%';       
 ```
 
-### ❇️ 5.5 Using POSITION or STRPOS (PostgreSQL functions)
+### ❇️ 5.5 - Using POSITION or STRPOS (PostgreSQL functions)
 
 ```sql
 SELECT *
@@ -219,7 +219,7 @@ WHERE STRPOS(name, 'Tennis') > 0;
 
 👉 Returns rows where "Tennis" occurs anywhere in the string.
 
-### ❇️ 5.6 Using Regular Expressions (~ operator in PostgreSQL)
+### ❇️ 5.6 - Using Regular Expressions (~ operator in PostgreSQL)
 
 ```sql
 SELECT *
@@ -231,7 +231,7 @@ WHERE name ~ 'Tennis';
 
 ## 6. Matching against multiple possible values
 
-### ℹ️ 6.1 Description
+### ℹ️ 6.1 - Description
 
 How can you retrieve the details of facilities with ID 1 and 5? Try to do it without using the OR operator.
 
@@ -242,7 +242,7 @@ How can you retrieve the details of facilities with ID 1 and 5? Try to do it wit
 | 1     | Tennis Court 2   | 5          | 25        | 8000          | 200                |
 | 5     | Massage Room 2   | 35         | 80        | 4000          | 3000               |
 
-### ✅ 6.3 My Solution
+### ✅ 6.3 - My Solution
 
 ```sql
 SELECT * 
@@ -250,7 +250,7 @@ FROM cd.facilities
 WHERE facid IN (1, 5);
 ```
 
-### 🛜 6.4 Website's Solution
+### 🛜 6.4 - Website's Solution
 
 ```sql
 select *
@@ -259,7 +259,7 @@ where
     facid in (1,5);          
 ```
 
-### ❇️ 6.5 Using BETWEEN (only works if values are consecutive)
+### ❇️ 6.5 - Using BETWEEN (only works if values are consecutive)
 
 ```sql
 SELECT *
@@ -269,7 +269,7 @@ WHERE facid BETWEEN 1 AND 5;
 
 ⚠️ This will also include facid = 2, 3, 4, so only use if that’s acceptable.
 
-### ❇️ 6.6 Using ANY (PostgreSQL)
+### ❇️ 6.6 - Using ANY (PostgreSQL)
 
 ```sql
 SELECT *
@@ -279,11 +279,11 @@ WHERE facid = ANY (ARRAY[1, 5]);
 
 ## 7. Classify results into buckets
 
-### ℹ️ 7.1 Description
+### ℹ️ 7.1 - Description
 
 How can you produce a list of facilities, with each labelled as 'cheap' or 'expensive' depending on if their monthly maintenance cost is more than $100? Return the name and monthly maintenance of the facilities in question.
 
-### ☑️ 7.2 Expected Results
+### ☑️ 7.2 - Expected Results
 
 | name             | cost      |
 |------------------|-----------|
@@ -297,7 +297,7 @@ How can you produce a list of facilities, with each labelled as 'cheap' or 'expe
 | Snooker Table    | cheap     |
 | Pool Table       | cheap     |
 
-### ✅ 7.3 My Solution
+### ✅ 7.3 - My Solution
 
 ```sql
 SELECT name,
@@ -308,7 +308,7 @@ SELECT name,
 FROM cd.facilities;
 ```
 
-### 🛜 7.4 Website's Solution
+### 🛜 7.4 - Website's Solution
 
 ```sql
 select name, 
@@ -320,7 +320,7 @@ select name,
 from cd.facilities;       
 ```
 
-### ❇️ 7.5 Using CASE with shorthand
+### ❇️ 7.5 - Using CASE with shorthand
 
 ```sql
 SELECT name,
@@ -334,11 +334,11 @@ FROM cd.facilities;
 
 ## 8. Working with dates
 
-### ℹ️ 8.1 Description
+### ℹ️ 8.1 - Description
 
 How can you produce a list of members who joined after the start of September 2012? Return the memid, surname, firstname, and joindate of the members in question.
 
-### ☑️ 8.2 Expected Results
+### ☑️ 8.2 - Expected Results
 
 | memid | surname           | firstname   | joindate             |
 |-------|-------------------|-------------|----------------------|
@@ -353,7 +353,7 @@ How can you produce a list of members who joined after the start of September 20
 | 36    | Crumpet           | Erica       | 2012-09-22 08:36:38  |
 | 37    | Smith             | Darren      | 2012-09-26 18:08:45  |
 
-### ✅ 8.3 My Solution
+### ✅ 8.3 - My Solution
 
 ```sql
 SELECT memid, surname, firstname, joindate
@@ -361,7 +361,7 @@ FROM cd.members
 WHERE joindate > '2012-09-01';
 ```
 
-### 🛜 8.4 Website's Solution
+### 🛜 8.4 - Website's Solution
 
 ```sql
 select memid, surname, firstname, joindate 
@@ -371,7 +371,7 @@ where joindate >= '2012-09-01';
 
 👉 This gets automatically cast by postgres into the full timestamp 2012-09-01 00:00:00.
 
-### ❇️ 8.5 Using EXTRACT function
+### ❇️ 8.5 - Using EXTRACT function
 
 ```sql
 SELECT memid, surname, firstname, joindate
@@ -382,7 +382,7 @@ AND EXTRACT(MONTH FROM joindate) >= 9;
 
 👉 Filters by year/month components.
 
-### ❇️ 8.6 Using a subquery
+### ❇️ 8.6 - Using a subquery
 
 ```sql
 SELECT memid, surname, firstname, joindate
@@ -392,11 +392,11 @@ WHERE joindate > (SELECT DATE '2012-09-01');
 
 ## 9. Removing duplicates, and ordering results
 
-### ℹ️ 9.1 Description
+### ℹ️ 9.1 - Description
 
 How can you produce an ordered list of the first 10 surnames in the members table? The list must not contain duplicates.
 
-### ☑️ 9.2 Expected Results
+### ☑️ 9.2 - Expected Results
 
 | Surname  |
 |----------|
@@ -411,7 +411,7 @@ How can you produce an ordered list of the first 10 surnames in the members tabl
 | GUEST    |
 | Genting  |
 
-### ✅ 9.3 My Solution
+### ✅ 9.3 - My Solution
 
 ```sql
 SELECT DISTINCT surname 
@@ -420,7 +420,7 @@ ORDER BY surname
 LIMIT 10;
 ```
 
-### 🛜 9.4 Website's Solution
+### 🛜 9.4 - Website's Solution
 
 ```sql
 select distinct surname 
@@ -429,7 +429,7 @@ order by surname
 limit 10;   
 ```
 
-### ❇️ 9.5 Using a CTE (Common Table Expression)
+### ❇️ 9.5 - Using a CTE (Common Table Expression)
 
 ```sql
 WITH unique_surnames AS (
@@ -444,11 +444,11 @@ LIMIT 10;
 
 ## 10. Combining results from multiple queries
 
-### ℹ️ 10.1 Description
+### ℹ️ 10.1 - Description
 
 You, for some reason, want a combined list of all surnames and all facility names. Produce that list!
 
-### ☑️ 10.2 Expected Results
+### ☑️ 10.2 - Expected Results
 
 | surname            |
 |--------------------|
@@ -487,7 +487,7 @@ You, for some reason, want a combined list of all surnames and all facility name
 | GUEST              |
 | Jones              |
 
-### ✅ 10.3 My Solution
+### ✅ 10.3 - My Solution
 
 ```sql
 SELECT surname
@@ -497,7 +497,7 @@ SELECT name
 FROM cd.facilities
 ```
 
-### 🛜 10.4 Website's Solution
+### 🛜 10.4 - Website's Solution
 
 ```sql
 select surname 
@@ -507,7 +507,7 @@ select name
 from cd.facilities;   
 ```
 
-### ❇️ 10.5 UNION ALL
+### ❇️ 10.5 - UNION ALL
 
 ```sql
 SELECT surname FROM cd.members
@@ -518,5 +518,39 @@ SELECT name FROM cd.facilities;
 👉 Keeps duplicates instead of removing them and it's faster because it avoids the deduplication step.
 
 ## 11. Simple aggregation
+
+### ℹ️ 11.1 - Description
+
+You'd like to get the signup date of your last member. How can you retrieve this information?
+
+### ☑️ 11.2 - Expected Results
+
+| latest              |
+|---------------------|
+| 2012-09-26 18:08:45 |
+
+### ✅ 11.3 - My Solution
+
+```sql
+SELECT MAX(joindate) AS latest
+FROM cd.members
+```
+
+### 🛜 11.4 - Website's Solution
+
+```sql
+select max(joindate) as latest
+from cd.members;          
+```
+
+### ❇️ 11.5 - ORDER BY + LIMIT
+
+```sql
+SELECT joindate AS latest
+FROM cd.members 
+ORDER BY joindate DESC LIMIT 1;
+```
+
+👉 Reads naturally: “give me the most recent join date.”
 
 ## 12. More aggregation
