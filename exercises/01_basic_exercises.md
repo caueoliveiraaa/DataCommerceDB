@@ -444,6 +444,79 @@ LIMIT 10;
 
 ## 10. Combining results from multiple queries
 
+### ℹ️ 10.1 Description
+
+You, for some reason, want a combined list of all surnames and all facility names. Produce that list!
+
+### ☑️ 10.2 Expected Results
+
+| surname            |
+|--------------------|
+| Tennis Court 2     |
+| Worthington-Smyth  |
+| Badminton Court    |
+| Pinker             |
+| Dare               |
+| Bader              |
+| Mackenzie          |
+| Crumpet            |
+| Massage Room 1     |
+| Squash Court       |
+| Tracy              |
+| Hunt               |
+| Tupperware         |
+| Smith              |
+| Butters            |
+| Rownam             |
+| Baker              |
+| Genting            |
+| Purview            |
+| Coplin             |
+| Massage Room 2     |
+| Joplette           |
+| Stibbons           |
+| Rumney             |
+| Pool Table         |
+| Sarwin             |
+| Boothe             |
+| Farrell            |
+| Tennis Court 1     |
+| Snooker Table      |
+| Owen               |
+| Table Tennis       |
+| GUEST              |
+| Jones              |
+
+### ✅ 10.3 My Solution
+
+```sql
+SELECT surname
+FROM cd.members
+UNION
+SELECT name
+FROM cd.facilities
+```
+
+### 🛜 10.4 Website's Solution
+
+```sql
+select surname 
+from cd.members
+union
+select name
+from cd.facilities;   
+```
+
+### ❇️ 10.5 UNION ALL
+
+```sql
+SELECT surname FROM cd.members
+UNION ALL
+SELECT name FROM cd.facilities;
+```
+
+👉 Keeps duplicates instead of removing them and it's faster because it avoids the deduplication step.
+
 ## 11. Simple aggregation
 
 ## 12. More aggregation
