@@ -1,6 +1,24 @@
 # Basic Exercises
 
-This category deals with the basics of SQL. It covers select and where clauses, case expressions, unions, and a few other odds and ends. If you're already educated in SQL you will probably find these exercises fairly easy. If not, you should find them a good point to start learning for the more difficult categories ahead!
+This category deals with the basics of SQL. It covers select and where clauses, case expressions, unions, and a few other related SQL clauses and concepts. If you're already educated in SQL you will probably find these exercises fairly easy. If not, you should find them a good point to start learning for the more difficult categories ahead! Down below you can find the tables used in the exercises:
+
+🧑‍🤝‍🧑 cd.members
+
+| memid | surname           | firstname   | address                          | zipcode | telephone     | recommendedby | joindate             |
+|-------|-------------------|-------------|----------------------------------|---------|---------------|---------------|----------------------|
+| INT   | VARCHAR(200)      | VARCHAR(200)| VARCHAR(300)                     | INT     | VARCHAR(20)   | INT (nullable)| TIMESTAMP            |
+
+🏟️ cd.facilities
+
+| facid | name             | membercost | guestcost | initialoutlay | monthlymaintenance |
+|-------|------------------|------------|-----------|---------------|--------------------|
+| INT   | VARCHAR(100)     | NUMERIC    | NUMERIC   | NUMERIC       | NUMERIC            |
+
+📅 cd.bookings
+
+| bookid | facid | memid | starttime           | slots |
+|--------|-------|-------|---------------------|-------|
+| INT    | INT   | INT   | TIMESTAMP           | INT   |
 
 ## 1. Retrieve everything from a table
 
@@ -102,7 +120,8 @@ select * from cd.facilities where membercost > 0;
 
 ### ℹ️ 4.1 Description
 
-How can you produce a list of facilities that charge a fee to members, and that fee is less than 1/50th of the monthly maintenance cost? Return the facid, facility name, member cost, and monthly maintenance of the facilities in question.
+How can you produce a list of facilities that charge a fee to members, and that fee is less than 1/50th of the monthly maintenance cost?</br>
+Return the facid, facility name, member cost, and monthly maintenance of the facilities in question.
 
 ### ☑️ 4.2 Expected Results
 
@@ -142,12 +161,12 @@ AND membercost * 50 < monthlymaintenance;
 ### ❇️ 4.6 Use a Common Table Expression (CTE)
 
 ```sql
-WITH threshold AS (
+WITH threshold_cte AS (
     SELECT facid, name, membercost, monthlymaintenance, monthlymaintenance / 50 AS threshold
     FROM cd.facilities
 )
 SELECT facid, name, membercost, monthlymaintenance
-FROM threshold
+FROM threshold_cte
 WHERE membercost > 0
 AND membercost < threshold;
 ```
@@ -314,6 +333,62 @@ FROM cd.facilities;
 👉 Just flips the condition order.
 
 ## 8. Working with dates
+
+### ℹ️ 8.1 Description
+
+How can you produce a list of members who joined after the start of September 2012? Return the memid, surname, firstname, and joindate of the members in question.
+
+### ☑️ 8.2 Expected Results
+
+| memid | surname           | firstname   | joindate             |
+|-------|-------------------|-------------|----------------------|
+| 24    | Sarwin            | Ramnaresh   | 2012-09-01 08:44:42  |
+| 26    | Jones             | Douglas     | 2012-09-02 18:43:05  |
+| 27    | Rumney            | Henrietta   | 2012-09-05 08:42:35  |
+| 28    | Farrell           | David       | 2012-09-15 08:22:05  |
+| 29    | Worthington-Smyth | Henry       | 2012-09-17 12:27:15  |
+| 30    | Purview           | Millicent   | 2012-09-18 19:04:01  |
+| 33    | Tupperware        | Hyacinth    | 2012-09-18 19:32:05  |
+| 35    | Hunt              | John        | 2012-09-19 11:32:45  |
+| 36    | Crumpet           | Erica       | 2012-09-22 08:36:38  |
+| 37    | Smith             | Darren      | 2012-09-26 18:08:45  |
+
+### ✅ 8.3 My Solution
+
+```sql
+SELECT memid, surname, firstname, joindate
+FROM cd.members
+WHERE joindate > '2012-09-01';
+```
+
+### 🛜 8.4 Website's Solution
+
+```sql
+select memid, surname, firstname, joindate 
+from cd.members
+where joindate >= '2012-09-01';    
+```
+
+👉 This gets automatically cast by postgres into the full timestamp 2012-09-01 00:00:00.
+
+### ❇️ 8.5 Using EXTRACT function
+
+```sql
+SELECT memid, surname, firstname, joindate
+FROM cd.members
+WHERE EXTRACT(YEAR FROM joindate) = 2012
+AND EXTRACT(MONTH FROM joindate) >= 9;
+```
+
+👉 Filters by year/month components.
+
+### ❇️ 8.6 Using a subquery
+
+```sql
+SELECT memid, surname, firstname, joindate
+FROM cd.members
+WHERE joindate > (SELECT DATE '2012-09-01');
+```
 
 ## 9. Removing duplicates, and ordering results
 
