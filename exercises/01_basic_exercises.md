@@ -392,6 +392,56 @@ WHERE joindate > (SELECT DATE '2012-09-01');
 
 ## 9. Removing duplicates, and ordering results
 
+### ℹ️ 9.1 Description
+
+How can you produce an ordered list of the first 10 surnames in the members table? The list must not contain duplicates.
+
+### ☑️ 9.2 Expected Results
+
+| Surname  |
+|----------|
+| Bader    |
+| Baker    |
+| Boothe   |
+| Butters  |
+| Coplin   |
+| Crumpet  |
+| Dare     |
+| Farrell  |
+| GUEST    |
+| Genting  |
+
+### ✅ 9.3 My Solution
+
+```sql
+SELECT DISTINCT surname 
+FROM cd.members
+ORDER BY surname
+LIMIT 10;
+```
+
+### 🛜 9.4 Website's Solution
+
+```sql
+select distinct surname 
+from cd.members
+order by surname
+limit 10;   
+```
+
+### ❇️ 9.5 Using a CTE (Common Table Expression)
+
+```sql
+WITH unique_surnames AS (
+    SELECT DISTINCT surname
+    FROM cd.members
+)
+SELECT surname
+FROM unique_surnames
+ORDER BY surname
+LIMIT 10;
+```
+
 ## 10. Combining results from multiple queries
 
 ## 11. Simple aggregation
