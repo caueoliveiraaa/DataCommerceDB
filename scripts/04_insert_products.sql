@@ -1,5 +1,5 @@
 /*
-File: ~/DataCommerceDB/scripts/insert_products.sql
+File: ~/DataCommerceDB/scripts/04_insert_products.sql
 Purpose: Injects all products into the products table.
 */
 
@@ -153,7 +153,7 @@ VALUES ('Cocktail Shaker and Mixing Glass Set', 39.99, 'Kitchen')
 ON CONFLICT (name) DO NOTHING;
 
 INSERT INTO commerce.products (name, price, category)
-VALUES ('Granola', 4.79, 'Food - Breakfast')
+VALUES ('Black Granola', 4.79, 'Food - Breakfast')
 ON CONFLICT (name) DO NOTHING;
 
 INSERT INTO commerce.products (name, price, category)
