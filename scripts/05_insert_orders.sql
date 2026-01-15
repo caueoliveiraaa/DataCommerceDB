@@ -1,5 +1,5 @@
 /*
-File: ~/DataCommerceDB/scripts/insert_orders.sql
+File: ~/DataCommerceDB/scripts/05_insert_orders.sql
 Purpose: Injects all orders into the orders table.
 */
 
