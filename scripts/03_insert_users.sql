@@ -1,5 +1,5 @@
 /*
-File: ~/DataCommerceDB/scripts/insert_users.sql
+File: ~/DataCommerceDB/scripts/03_insert_users.sql
 Purpose: Injects all users into the users table.
 */
 
