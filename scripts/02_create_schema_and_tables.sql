@@ -8,6 +8,7 @@ Steps:
     - Creates the table "commerce.products" and writes its comments.
     - Creates the table "commerce.orders" and writes its comments.
     - Add uniqueness to "commerce.orders", allowing one order per user/product per day.
+    - Creates the table "commerce.stock" and writes its comments.
 */
 
 -- Create schema commerce
@@ -73,3 +74,18 @@ COMMENT ON COLUMN commerce.orders.product_id IS 'Identifier of the purchased pro
 COMMENT ON COLUMN commerce.orders.quantity IS 'Number of units of the product purchased';
 COMMENT ON COLUMN commerce.orders.updated_at IS 'Timestamp of the last update to this row';
 COMMENT ON COLUMN commerce.orders.created_at IS 'Timestamp when the row was created';
+
+-- Create table stock into schema commerce
+CREATE TABLE IF NOT EXISTS commerce.stock (
+    stock_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    product_id INTEGER NOT NULL REFERENCES commerce.products(product_id) ON DELETE CASCADE,
+    stock_quantity INTEGER NOT NULL CHECK (stock_quantity >= 0),
+    last_restock TIMESTAMP DEFAULT NOW()
+);
+
+-- Create comments for table stock
+COMMENT ON TABLE commerce.stock IS 'All the inventories referencing the products';
+COMMENT ON COLUMN commerce.stock.stock_id IS 'Unique identifier for each stock';
+COMMENT ON COLUMN commerce.stock.product_id IS 'Identifier of the product referencing the stock';
+COMMENT ON COLUMN commerce.stock.stock_quantity IS 'Number of units of the product in the stock';
+COMMENT ON COLUMN commerce.stock.last_restock IS 'Timestamp of the last restock';
