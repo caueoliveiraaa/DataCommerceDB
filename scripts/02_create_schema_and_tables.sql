@@ -89,3 +89,7 @@ COMMENT ON COLUMN commerce.stock.stock_id IS 'Unique identifier for each stock';
 COMMENT ON COLUMN commerce.stock.product_id IS 'Identifier of the product referencing the stock';
 COMMENT ON COLUMN commerce.stock.stock_quantity IS 'Number of units of the product in the stock';
 COMMENT ON COLUMN commerce.stock.last_restock IS 'Timestamp of the last restock';
+
+-- Create constraint that only allows one product per registered stoc
+ALTER TABLE commerce.stock
+ADD CONSTRAINT unique_product_stock UNIQUE (product_id);
