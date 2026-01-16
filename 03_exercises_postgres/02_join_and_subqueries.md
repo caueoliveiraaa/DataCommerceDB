@@ -79,7 +79,8 @@ where
         and mems.memid = bks.memid;   
 ```
 
-👉 This is functionally exactly the same as the approved answer. If you feel more comfortable with this syntax, feel free to use it!
+👉 This is functionally exactly the same as the approved answer.</br>
+If you feel more comfortable with this syntax, feel free to use it!
 
 ### ❇️ 1.5 - Filtering first with a subquery
 
@@ -108,36 +109,103 @@ SELECT b.starttime FROM cd.bookings b
 JOIN target_member tm ON b.memid = tm.memid;
 ```
 
-👉 Makes the query more readable and modular.
+### ❇️ 1.7 - NATURAL JOIN
+
+```sql
+SELECT b.starttime FROM cd.members m
+NATURAL JOIN cd.bookings b
+WHERE m.firstname = 'David'
+  AND m.surname = 'Farrell';
+```
+
+👉 Automatic matching and no explicit condition.
 
 ## 2. Work out the start times of bookings for tennis courts
 
 ### ℹ️ 2.1 - Description
 
+How can you produce a list of the start times for bookings for tennis courts, for the date '2012-09-21'?</br>
+Return a list of start time and facility name pairings, ordered by the time.
+
 ### ☑️ 2.2 Expected Results
+
+| start               | name           |
+|---------------------|----------------|
+| 2012-09-21 08:00:00 | Tennis Court 1 |
+| 2012-09-21 08:00:00 | Tennis Court 2 |
+| 2012-09-21 09:30:00 | Tennis Court 1 |
+| 2012-09-21 10:00:00 | Tennis Court 2 |
+| 2012-09-21 11:30:00 | Tennis Court 2 |
+| 2012-09-21 12:00:00 | Tennis Court 1 |
+| 2012-09-21 13:30:00 | Tennis Court 1 |
+| 2012-09-21 14:00:00 | Tennis Court 2 |
+| 2012-09-21 15:30:00 | Tennis Court 1 |
+| 2012-09-21 16:00:00 | Tennis Court 2 |
+| 2012-09-21 17:00:00 | Tennis Court 1 |
+| 2012-09-21 18:00:00 | Tennis Court 2 |
 
 ### ✅ 2.3 - My Solution
 
 ```sql
-
+SELECT b.starttime start, f.name FROM cd.bookings b
+INNER JOIN cd.facilities f ON f.facid = b.facid
+WHERE name ILIKE '%tennis court%'
+AND b.starttime::date = '2012-09-21' 
+ORDER BY b.starttime;
 ```
 
 ### 🛜 2.4 - Website's Solution
 
 ```sql
-
+select bks.starttime as start, facs.name as name
+from 
+    cd.facilities facs
+    inner join cd.bookings bks
+        on facs.facid = bks.facid
+where 
+    facs.name in ('Tennis Court 2','Tennis Court 1') and
+    bks.starttime >= '2012-09-21' and
+    bks.starttime < '2012-09-22'
+order by bks.starttime;    
 ```
 
-### ❇️ 2.5 -
+### ❇️ 2.5 - Common Table Expression (CTE)
 
 ```sql
+WITH tennis_facilities AS (
+    SELECT facid, name
+    FROM cd.facilities
+    WHERE name ILIKE '%Tennis Court%'
+)
+SELECT b.starttime AS start, f.name FROM cd.bookings b
+JOIN tennis_facilities f ON b.facid = f.facid
+WHERE b.starttime::date = '2012-09-21'
+ORDER BY b.starttime;
 ```
 
-👉
+👉 Improves readability by isolating facility filtering logic.
+
+### ❇️ 2.6 - Subquery for Facility Filtering
+
+```sql
+SELECT b.starttime AS start, f.name FROM cd.bookings b
+JOIN (
+    SELECT facid, name
+    FROM cd.facilities
+    WHERE name ILIKE '%Tennis Court%'
+) f ON b.facid = f.facid
+WHERE b.starttime::date = '2012-09-21'
+ORDER BY b.starttime;
+```
+
+👉 Filters facilities first, then joins only relevant rows.
 
 ## 3. Produce a list of all members who have recommended another member
 
 ### ℹ️ 3.1 - Description
+
+How can you output a list of all members who have recommended another member?</br>
+Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname).
 
 ### ☑️ 3.2 Expected Results
 
