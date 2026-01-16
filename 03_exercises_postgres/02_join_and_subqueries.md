@@ -209,24 +209,54 @@ Ensure that there are no duplicates in the list, and that results are ordered by
 
 ### ☑️ 3.2 Expected Results
 
+| firstname  | surname   |
+|------------|-----------|
+| Florence   | Bader     |
+| Timothy    | Baker     |
+| Gerald     | Butters   |
+| Jemima     | Farrell   |
+| Matthew    | Genting   |
+| David      | Jones     |
+| Janice     | Joplette  |
+| Millicent  | Purview   |
+| Tim        | Rownam    |
+| Darren     | Smith     |
+| Tracy      | Smith     |
+| Ponder     | Stibbons  |
+| Burton     | Tracy     |
+
 ### ✅ 3.3 - My Solution
 
 ```sql
-
+SELECT DISTINCT t1.firstname, t1.surname FROM cd.members t1
+INNER JOIN cd.members t2 ON t1.memid = t2.recommendedby 
+ORDER BY t1.surname, t1.firstname;
 ```
 
 ### 🛜 3.4 - Website's Solution
 
 ```sql
-
+select distinct recs.firstname as firstname, recs.surname as surname
+from 
+    cd.members mems
+    inner join cd.members recs
+        on recs.memid = mems.recommendedby
+order by surname, firstname;    
 ```
 
-### ❇️ 3.5 -
+### ❇️ 3.5 - Using a Subquery with IN
 
 ```sql
+SELECT DISTINCT firstname, surname FROM cd.members
+WHERE memid IN (
+    SELECT recommendedby
+    FROM cd.members
+    WHERE recommendedby IS NOT NULL
+)
+ORDER BY surname, firstname;
 ```
 
-👉
+👉 Pulls all memid values that appear in the recommendedby column, then filters members by those IDs.
 
 ## 4. Produce a list of all members, along with their recommender
 
