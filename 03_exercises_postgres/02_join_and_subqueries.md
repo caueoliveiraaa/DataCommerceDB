@@ -262,26 +262,64 @@ ORDER BY surname, firstname;
 
 ### ℹ️ 4.1 - Description
 
+How can you output a list of all members, including the individual who recommended them (if any)? Ensure that results are ordered by (surname, firstname).
+
 ### ☑️ 4.2 Expected Results
+
+| memfname   | memsname             | recfname   | recsname   |
+|------------|----------------------|------------|------------|
+| Florence   | Bader                | Ponder     | Stibbons   |
+| Anne       | Baker                | Ponder     | Stibbons   |
+| Timothy    | Baker                | Jemima     | Farrell    |
+| Tim        | Boothe               | Tim        | Rownam     |
+| Gerald     | Butters              | Darren     | Smith      |
+| Joan       | Coplin               | Timothy    | Baker      |
+| Erica      | Crumpet              | Tracy      | Smith      |
+| Nancy      | Dare                 | Janice     | Joplette   |
+| David      | Farrell              |            |            |
+| Jemima     | Farrell              |            |            |
+| GUEST      | GUEST                |            |            |
+| Matthew    | Genting              | Gerald     | Butters    |
+| John       | Hunt                 | Millicent  | Purview    |
+| David      | Jones                | Janice     | Joplette   |
+| Douglas    | Jones                | David      | Jones      |
+| Janice     | Joplette             | Darren     | Smith      |
+| Anna       | Mackenzie            | Darren     | Smith      |
+| Charles    | Owen                 | Darren     | Smith      |
+| David      | Pinker               | Jemima     | Farrell    |
+| Millicent  | Purview              | Tracy      | Smith      |
+| Tim        | Rownam               |            |            |
+| Henrietta  | Rumney               | Matthew    | Genting    |
+| Ramnaresh  | Sarwin               | Florence   | Bader      |
+| Darren     | Smith                |            |            |
+| Darren     | Smith                |            |            |
+| Jack       | Smith                | Darren     | Smith      |
+| Tracy      | Smith                |            |            |
+| Ponder     | Stibbons             | Burton     | Tracy      |
+| Burton     | Tracy                |            |            |
+| Hyacinth   | Tupperware           |            |            |
+| Henry      | Worthington-Smyth    | Tracy      | Smith      |
 
 ### ✅ 4.3 - My Solution
 
 ```sql
-
+SELECT t1.firstname memfname, t1.surname memsname, t2.firstname recfname, t2.surname recsname
+FROM cd.members t1
+LEFT JOIN cd.members t2
+ON t2.memid = t1.recommendedby
+ORDER BY memsname, memfname;
 ```
 
 ### 🛜 4.4 - Website's Solution
 
 ```sql
-
+select mems.firstname as memfname, mems.surname as memsname, recs.firstname as recfname, recs.surname as recsname
+from 
+    cd.members mems
+    left outer join cd.members recs
+        on recs.memid = mems.recommendedby
+order by memsname, memfname;    
 ```
-
-### ❇️ 4.5 -
-
-```sql
-```
-
-👉
 
 ## 5. Produce a list of all members who have used a tennis court
 
@@ -333,7 +371,7 @@ ORDER BY surname, firstname;
 
 👉
 
-## 7. Produce a list of all members, along with their recommender, using no joins.
+## 7. Produce a list of all members, along with their recommender, using no joins
 
 ### ℹ️ 7.1 - Description
 
