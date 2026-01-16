@@ -1,6 +1,8 @@
 # Basic Exercises
 
-This category deals with the basics of SQL. It covers select and where clauses, case expressions, unions, and a few other related SQL clauses and concepts. If you're already educated in SQL you will probably find these exercises fairly easy. If not, you should find them a good point to start learning for the more difficult categories ahead! Down below you can find the tables used in the exercises:
+This category deals with the basics of SQL. It covers select and where clauses, case expressions, unions, and a few other related SQL clauses and concepts. If you're already educated in SQL you will probably find these exercises fairly easy. If not, you should find them a good point to start learning for the more difficult categories ahead!
+
+Down below you can find the tables used in the exercises:
 
 🧑‍🤝‍🧑 cd.members
 
