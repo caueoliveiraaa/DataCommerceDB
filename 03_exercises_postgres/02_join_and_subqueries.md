@@ -426,7 +426,30 @@ ORDER BY member, facility;
 
 ### ℹ️ 6.1 - Description
 
+How can you produce a list of bookings on the day of 2012-09-14 which will cost the member (or guest) more than $30? Remember that guests have different costs to members (the listed costs are per half-hour 'slot'), and the guest user is always ID 0. Include in your output the name of the facility, the name of the member formatted as a single column, and the cost. Order by descending cost, and do not use any subqueries.
+
 ### ☑️ 6.2 Expected Results
+
+| Member          | Facility        | Cost  |
+|-----------------|-----------------|-------|
+| GUEST GUEST     | Massage Room 2  | 320   |
+| GUEST GUEST     | Massage Room 1  | 160   |
+| GUEST GUEST     | Massage Room 1  | 160   |
+| GUEST GUEST     | Massage Room 1  | 160   |
+| GUEST GUEST     | Tennis Court 2  | 150   |
+| Jemima Farrell  | Massage Room 1  | 140   |
+| GUEST GUEST     | Tennis Court 1  | 75    |
+| GUEST GUEST     | Tennis Court 2  | 75    |
+| GUEST GUEST     | Tennis Court 1  | 75    |
+| Matthew Genting | Massage Room 1  | 70    |
+| Florence Bader  | Massage Room 2  | 70    |
+| GUEST GUEST     | Squash Court    | 70.0  |
+| Jemima Farrell  | Massage Room 1  | 70    |
+| Ponder Stibbons | Massage Room 1  | 70    |
+| Burton Tracy    | Massage Room 1  | 70    |
+| Jack Smith      | Massage Room 1  | 70    |
+| GUEST GUEST     | Squash Court    | 35.0  |
+| GUEST GUEST     | Squash Court    | 35.0  |
 
 ### ✅ 6.3 - My Solution
 
