@@ -454,21 +454,48 @@ How can you produce a list of bookings on the day of 2012-09-14 which will cost 
 ### ✅ 6.3 - My Solution
 
 ```sql
-
+SELECT m.firstname || ' ' || m.surname member, f.name facility,
+CASE
+    WHEN m.memid = 0 THEN f.guestcost * b.slots
+    WHEN m.memid > 0 THEN f.membercost * b.slots
+END AS cost
+FROM cd.members m
+INNER JOIN cd.bookings b ON b.memid = m.memid 
+INNER JOIN cd.facilities f ON f.facid = b.facid
+WHERE b.starttime::date = '2012-09-14' 
+AND (
+(m.memid = 0 AND (f.guestcost * b.slots) > 30.0)
+OR
+(m.memid > 0 AND (f.membercost * b.slots) > 30.0)
+)
+ORDER BY cost DESC;
 ```
 
 ### 🛜 6.4 - Website's Solution
 
 ```sql
-
+select mems.firstname || ' ' || mems.surname as member, 
+facs.name as facility, 
+case 
+    when mems.memid = 0 then
+        bks.slots*facs.guestcost
+    else
+        bks.slots*facs.membercost
+end as cost
+    from
+            cd.members mems                
+            inner join cd.bookings bks
+                    on mems.memid = bks.memid
+            inner join cd.facilities facs
+                    on bks.facid = facs.facid
+    where
+    bks.starttime >= '2012-09-14' and 
+    bks.starttime < '2012-09-15' and (
+        (mems.memid = 0 and bks.slots*facs.guestcost > 30) or
+        (mems.memid != 0 and bks.slots*facs.membercost > 30)
+    )
+order by cost desc;     
 ```
-
-### ❇️ 6.5 -
-
-```sql
-```
-
-👉
 
 ## 7. Produce a list of all members, along with their recommender, using no joins
 
