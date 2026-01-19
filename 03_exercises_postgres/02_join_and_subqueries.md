@@ -494,25 +494,74 @@ end as cost
         (mems.memid = 0 and bks.slots*facs.guestcost > 30) or
         (mems.memid != 0 and bks.slots*facs.membercost > 30)
     )
-order by cost desc;     
+order by cost desc;
 ```
 
 ## 7. Produce a list of all members, along with their recommender, using no joins
 
 ### ℹ️ 7.1 - Description
 
+How can you output a list of all members, including the individual who recommended them (if any), without using any joins? Ensure that there are no duplicates in the list, and that each firstname + surname pairing is formatted as a column and ordered.
+
 ### ☑️ 7.2 Expected Results
+
+| Member                   | Recommender       |
+|--------------------------|-------------------|
+| Anna Mackenzie           | Darren Smith      |
+| Anne Baker               | Ponder Stibbons   |
+| Burton Tracy             |                   |
+| Charles Owen             | Darren Smith      |
+| Darren Smith             |                   |
+| David Farrell            |                   |
+| David Jones              | Janice Joplette   |
+| David Pinker             | Jemima Farrell    |
+| Douglas Jones            | David Jones       |
+| Erica Crumpet            | Tracy Smith       |
+| Florence Bader           | Ponder Stibbons   |
+| GUEST GUEST              |                   |
+| Gerald Butters           | Darren Smith      |
+| Henrietta Rumney         | Matthew Genting   |
+| Henry Worthington-Smyth  | Tracy Smith       |
+| Hyacinth Tupperware      |                   |
+| Jack Smith               | Darren Smith      |
+| Janice Joplette          | Darren Smith      |
+| Jemima Farrell           |                   |
+| Joan Coplin              | Timothy Baker     |
+| John Hunt                | Millicent Purview |
+| Matthew Genting          | Gerald Butters    |
+| Millicent Purview        | Tracy Smith       |
+| Nancy Dare               | Janice Joplette   |
+| Ponder Stibbons          | Burton Tracy      |
+| Ramnaresh Sarwin         | Florence Bader    |
+| Tim Boothe               | Tim Rownam        |
+| Tim Rownam               |                   |
+| Timothy Baker            | Jemima Farrell    |
+| Tracy Smith              |                   |
 
 ### ✅ 7.3 - My Solution
 
 ```sql
-
+SELECT DISTINCT t1.firstname || ' ' || t1.surname member,
+(
+    SELECT t2.firstname || ' ' || t2.surname
+    FROM cd.members t2
+    WHERE t2.memid = t1.recommendedby
+) AS recommemder
+FROM cd.members t1
+ORDER BY member;
 ```
 
 ### 🛜 7.4 - Website's Solution
 
 ```sql
-
+select distinct mems.firstname || ' ' ||  mems.surname as member,
+(select recs.firstname || ' ' || recs.surname as recommender 
+    from cd.members recs 
+    where recs.memid = mems.recommendedby
+)
+from 
+    cd.members mems
+order by member;   
 ```
 
 ### ❇️ 7.5 -
