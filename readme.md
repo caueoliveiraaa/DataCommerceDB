@@ -11,32 +11,53 @@ This project was made for educational purposes, therefore it contains some exerc
 ```plaintexct
 DataCommerceDB/
 │
-├── exercises/
-│   └── basic_exercises.md_
-│
-├── schema/
-│   ├── functions/
-│   │   ├── calculate_discount.sql
-│   │   └── predict_revenue.sql
-│   │
-│   ├── procedures/
-│   │   ├── archive_old_orders.sql
-│   │   └── monthly_cleanup.sql
-│   │
-│   ├── triggers/
-│   │   └── update_timestamp.sql
-│   │
-│   └── views/
-│       ├── active_users.sql
-│       └── top_products.sql
-│
-├── scripts/
+├── 01_scripts/
 │   ├── 01_drop_and_create_database.sql
 │   ├── 02_create_schema_and_tables.sql
 │   ├── 03_insert_users.sql
 │   ├── 04_insert_products.sql
 │   ├── 05_insert_orders.sql
-│   └── grant_permissions.sql
+│   └── 06_insert_stocks.sql
+│
+├── 02_schema/
+│   ├── 01_joins_and_subqueries/
+│   │   ├── 01_inner_join.sql
+│   │   ├── 01_inner_join.sql
+│   │   ├── 03_right_join.sql
+│   │   ├── 04_full_join.sql
+│   │   ├── 05_self_join.sql
+│   │   ├── 06_natural_join.sql
+│   │   └── 07_cross_join.sql
+│   │
+│   ├── 02_views/
+│   │   ├── 01_active_users.sql
+│   │   └── 02_top_products.sql
+│   │
+│   ├── 03_functions/
+│   │   ├── 01_calculate_discount.sql
+│   │   └── 02_predict_revenue.sql
+│   │
+│   ├── 04_procedures/
+│   │   └── 01_monthly_cleanup.sql
+│   │
+│   ├── 05_triggers/
+│   │   └── 01_update_timestamp.sql
+│   │
+│   ├── 06_indexes/
+│   │
+│   ├── 07_ctes/
+│   │
+│   └── 08_tests/
+│
+├── 03_exercises/
+│   ├── 01_basic_exercises.sql
+│   ├── 02_join_and_subqueries.md
+│   ├── 03_modifying_data.md
+│   ├── 04_aggragate.md
+│   ├── 05_transactions.md
+│   ├── 06_dates.md
+│   ├── 07_strings.md
+│   └── 08_recursive.md
 │
 ├── .gitignore
 └── readme.md
@@ -44,28 +65,34 @@ DataCommerceDB/
 
 ## 📄 Structuring Description
 
-### 🦾 Exercises
+### 📜 01_scripts_setup
 
-The exercises/ folder contains PostgreSQL exercises for learning and practicing SQL with real world problem-solving.</br>
-They can be found on [this website](https://pgexercises.com/).
-
-### 🗂️ Schema
-
-The schema/ folder contains reusable SQL objects:
-
-- Functions: reusable calculations (e.g., discounts, revenue predictions).
-- Procedures: operational tasks (e.g., archiving old orders).
-- Triggers: automatic actions (e.g., updating timestamps).
-- Views: analytical perspectives (e.g., active users, top products).
-
-### 📜 Scripts
-
-The scripts/ folder contains executable SQL scripts for database lifecycle:
+The 01_scripts_setup/ folder contains executable SQL scripts for database lifecycle:
 
 - Create, drop, and reset the database.
 - Define schema and tables.
 - Insert sample data for users, products, and orders.
 - Grant permissions to roles.
+
+### 🗂️ 02_schema_commerce
+
+The 02_schema_commerce/ folder contains reusable SQL logic for manipulating and consulting data:
+
+- Joins.
+- Subqueries.
+- Views.
+- Functions.
+- Procedures.
+- Triggers.
+- Procedures.
+- Indexes.
+- CTEs.
+- Tests.
+
+### 🦾 Exercises
+
+The exercises/ folder contains PostgreSQL exercises for learning and practicing SQL with real world problem-solving.</br>
+They can be found on [this website](https://pgexercises.com/).
 
 ### 📂 Root
 
