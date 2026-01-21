@@ -14,6 +14,12 @@ Steps:
 -- Create schema commerce
 CREATE SCHEMA IF NOT EXISTS commerce;
 
+-- Drop tables if they exist (order matters because of foreign keys)
+DROP TABLE IF EXISTS commerce.stock CASCADE;
+DROP TABLE IF EXISTS commerce.orders CASCADE;
+DROP TABLE IF EXISTS commerce.products CASCADE;
+DROP TABLE IF EXISTS commerce.users CASCADE;
+
 -- Create table users into schema commerce
 CREATE TABLE IF NOT EXISTS commerce.users (
     user_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -21,7 +27,7 @@ CREATE TABLE IF NOT EXISTS commerce.users (
     name VARCHAR(255) NOT NULL,
     age INTEGER CHECK (age > 0),
     address VARCHAR(255),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -41,7 +47,7 @@ CREATE TABLE IF NOT EXISTS commerce.products (
     name VARCHAR(70) UNIQUE NOT NULL,
     price NUMERIC(10, 2) NOT NULL CHECK (price > 0.0),
     category VARCHAR(50),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -60,7 +66,7 @@ CREATE TABLE IF NOT EXISTS commerce.orders (
     user_id INTEGER NOT NULL REFERENCES commerce.users(user_id) ON DELETE RESTRICT,
     product_id INTEGER NOT NULL REFERENCES commerce.products(product_id) ON DELETE RESTRICT,
     quantity INTEGER NOT NULL CHECK (quantity > 0),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     created_date DATE GENERATED ALWAYS AS (created_at::date) STORED,
     CONSTRAINT unique_user_product_day UNIQUE (user_id, product_id, created_date)
@@ -80,7 +86,7 @@ CREATE TABLE IF NOT EXISTS commerce.stock (
     stock_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     product_id INTEGER NOT NULL REFERENCES commerce.products(product_id) ON DELETE CASCADE,
     stock_quantity INTEGER NOT NULL CHECK (stock_quantity >= 0),
-    last_restock TIMESTAMP DEFAULT NOW()
+    last_restock TIMESTAMP
 );
 
 -- Create comments for table stock
