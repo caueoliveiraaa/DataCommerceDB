@@ -41,8 +41,8 @@ INSERT INTO commerce.users (email, name, age, address)
 VALUES ('jrobert8@ow.ly', 'Jewel Robert', 34, 'Rua das Laranjeiras, 746 - Rio de Janeiro, RJ')
 ON CONFLICT (email) DO NOTHING;
 
-INSERT INTO commerce.users (email, name, age, address) 
-VALUES ('prounsefull9@tumblr.com', 'Peyter Rounsefull', 66, 'Rua XV de Novembro, 1 - Blumenau, SC')
+INSERT INTO commerce.users (email, name, age, address, active) 
+VALUES ('prounsefull9@tumblr.com', 'Peyter Rounsefull', 66, 'Rua XV de Novembro, 1 - Blumenau, SC', FALSE)
 ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO commerce.users (email, name, age, address) 
@@ -97,8 +97,8 @@ INSERT INTO commerce.users (email, name, age, address)
 VALUES ('mnuzzim@zdnet.com', 'Margareta Nuzzi', 34, 'Rua Corry, 35 - Manaus, AM')
 ON CONFLICT (email) DO NOTHING;
 
-INSERT INTO commerce.users (email, name, age, address) 
-VALUES ('dklehnn@nifty.com', 'Dur Klehn', 77, 'Rua Westport, 3 - Goiânia, GO')
+INSERT INTO commerce.users (email, name, age, address, active) 
+VALUES ('dklehnn@nifty.com', 'Dur Klehn', 77, 'Rua Westport, 3 - Goiânia, GO', FALSE)
 ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO commerce.users (email, name, age, address) 
@@ -137,8 +137,8 @@ INSERT INTO commerce.users (email, name, age, address)
 VALUES ('lwehnerrw@wordpress.org', 'Liliane Wehnerr', 74, 'Rua Manufacturers, 4 - Sorocaba, SP')
 ON CONFLICT (email) DO NOTHING;
 
-INSERT INTO commerce.users (email, name, age, address) 
-VALUES ('dbumpusx@mit.edu', 'Dilly Bumpus', 71, 'Rua Cascade, 73 - Blumenau, SC')
+INSERT INTO commerce.users (email, name, age, address, active) 
+VALUES ('dbumpusx@mit.edu', 'Dilly Bumpus', 71, 'Rua Cascade, 73 - Blumenau, SC', FALSE)
 ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO commerce.users (email, name, age, address) 
@@ -193,16 +193,16 @@ INSERT INTO commerce.users (email, name, age, address)
 VALUES ('walden1a@rakuten.co.jp', 'Wolfgang Alden', 23, 'Rua Vidon, 3 - São Paulo, SP')
 ON CONFLICT (email) DO NOTHING;
 
-INSERT INTO commerce.users (email, name, age, address) 
-VALUES ('worgill1b@icio.us', 'Win Orgill', 34, 'Rua Jenifer, 4 - Porto Alegre, RS')
+INSERT INTO commerce.users (email, name, age, address, active) 
+VALUES ('worgill1b@icio.us', 'Win Orgill', 34, 'Rua Jenifer, 4 - Porto Alegre, RS', FALSE)
 ON CONFLICT (email) DO NOTHING;
 
-INSERT INTO commerce.users (email, name, age, address) 
-VALUES ('tjimmes1c@joomla.org', 'Traci Jimmes', NULL, 'Rua Waywood, 538 - Fortaleza, CE')
+INSERT INTO commerce.users (email, name, age, address, active) 
+VALUES ('tjimmes1c@joomla.org', 'Traci Jimmes', NULL, 'Rua Waywood, 538 - Fortaleza, CE', FALSE)
 ON CONFLICT (email) DO NOTHING;
 
-INSERT INTO commerce.users (email, name, age, address) 
-VALUES ('pgoodfield1d@telegraph.co.uk', 'Prentice Goodfield', 55, 'Rua Cherokee, 743 - São Paulo, SP')
+INSERT INTO commerce.users (email, name, age, address, active) 
+VALUES ('pgoodfield1d@telegraph.co.uk', 'Prentice Goodfield', 55, 'Rua Cherokee, 743 - São Paulo, SP', FALSE)
 ON CONFLICT (email) DO NOTHING;
 
 COMMIT;
