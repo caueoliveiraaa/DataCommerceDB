@@ -11,9 +11,9 @@ DROP VIEW IF EXISTS commerce.inactive_users;
 
 -- Create the view, applying the logic of the query
 CREATE VIEW commerce.inactive_users AS
-SELECT user_id, user_name, email
+SELECT user_id, name, email, active
 FROM commerce.users
-WHERE active = TRUE
+WHERE active = FALSE
 ORDER BY user_id;
 
 -- Select data from the view that has been created
