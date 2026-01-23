@@ -14,40 +14,53 @@ DataCommerceDB/
 ├── 01_scripts/
 │   ├── 01_drop_and_create_database.sql
 │   ├── 02_create_schema_and_tables.sql
-│   ├── 03_insert_users.sql
-│   ├── 04_insert_products.sql
-│   ├── 05_insert_orders.sql
-│   └── 06_insert_stocks.sql
+│   ├── 03_insert_data.sql
+│   └── 04_check_data.sql
 │
 ├── 02_schema/
-│   ├── 01_joins_and_subqueries/
+│   ├── 01_joins/
 │   │   ├── 01_inner_join.sql
-│   │   ├── 01_inner_join.sql
+│   │   ├── 01_left_join.sql
 │   │   ├── 03_right_join.sql
 │   │   ├── 04_full_join.sql
 │   │   ├── 05_self_join.sql
-│   │   ├── 06_natural_join.sql
 │   │   └── 07_cross_join.sql
 │   │
+│   ├── 02_subqueries/
+│   │   └── .sql
+│   │
 │   ├── 02_views/
-│   │   ├── 01_active_users.sql
-│   │   └── 02_top_products.sql
+│   │   ├── 01_check_all_views.sql
+│   │   ├── 02_views_queries.sql
+│   │   ├── 03_inactive_users.sql
+│   │   ├── 03_valid_products.sql
+│   │   ├── 04_invalid_products.sql
+│   │   ├── 05_top_valid_producsts.sql
+│   │   └── 06_all_rows_with_nulls.sql
 │   │
 │   ├── 03_functions/
-│   │   ├── 01_calculate_discount.sql
-│   │   └── 02_predict_revenue.sql
+│   │   ├── 01_check_all_functions.sql
+│   │   ├── 02_functions_calls.sql
+│   │   ├── 03_calculate_discount.sql
+│   │   └── 04_predict_revenue.sql
 │   │
 │   ├── 04_procedures/
-│   │   └── 01_monthly_cleanup.sql
+│   │   ├── 01_check_all_procdures.sql
+│   │   ├── 02_procedures_calls.sql
+│   │   └── 03_insert_random_dates.sql
 │   │
 │   ├── 05_triggers/
-│   │   └── 01_update_timestamp.sql
+│   │   ├── 01_check_all_triggers.sql
+│   │   └── 02_update_timestamp.sql
 │   │
 │   ├── 06_indexes/
+│   │   └── .sql
 │   │
 │   ├── 07_ctes/
+│   │   └── .sql
 │   │
 │   └── 08_tests/
+│   │   └── .sql
 │
 ├── 03_exercises/
 │   ├── 01_basic_exercises.sql
