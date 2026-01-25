@@ -1,5 +1,8 @@
 /*
 Purpose: Updates the column 'updated_at' for all tables when a row is modifed.
+Steps:
+    - Define the function logic attached to the procedure.
+    - Attach the trigger to each table that has a column updated_at.
 */
 
 -- First create the trigger function
