@@ -1,5 +1,7 @@
 /*
 Purpose: Confirm the data has been inserted successfully.
+Steps:
+    - Count the rows of each tables to confirm the data has been inserted.
 */
 
 SELECT

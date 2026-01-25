@@ -1,13 +1,12 @@
 /*
-Purpose:
-    - Sets up the schema "commerce" and all its tables and table settings.
+Purpose: Sets up the schema commerce and all its tables and table settings.
 Steps:
-    - Creates the schema "commerce".
-    - Creates the table "commerce.users" and writes its comments.
-    - Creates the table "commerce.products" and writes its comments.
-    - Creates the table "commerce.orders" and writes its comments.
-    - Add uniqueness to "commerce.orders", allowing one order per user/product per day.
-    - Creates the table "commerce.stock" and writes its comments.
+    - Create the schema commerce.
+    - Create the table commerce.users and writes its comments.
+    - Create the table commerce.products and writes its comments.
+    - Create the table commerce.orders and writes its comments.
+    - Add uniqueness to commerce.orders, allowing one order per user/product per day.
+    - Create the table commerce.stock and writes its comments.
     - Create constraint that only allows one product per registered stock.
 */
 
@@ -62,6 +61,6 @@ CREATE TABLE IF NOT EXISTS commerce.stock (
     last_restock TIMESTAMP
 );
 
--- Create constraint that only allows one product per registered stoc
+-- Create constraint that only allows one product per registered stock
 ALTER TABLE commerce.stock
 ADD CONSTRAINT unique_product_stock UNIQUE (product_id);
