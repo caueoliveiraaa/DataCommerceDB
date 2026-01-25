@@ -1,10 +1,11 @@
 /*
-Purpose: Display an inner join.
+Purpose: Display an inner join, joining all tables.
 Steps:
     - Remove categories and ages that are null.
     - Find the amount of products that respect the stock amount.
     - Order by name of users and then their email.
 */
+
 SELECT
     u.name user_name, 
     u.email user_email,
@@ -17,7 +18,7 @@ FROM commerce.users u
 INNER JOIN commerce.orders o ON o.user_id = u.user_id
 INNER JOIN commerce.products p ON p.product_id = o.product_id
 INNER JOIN commerce.stock s ON s.product_id = p.product_id
-WHERE category IS NOT NULL
-AND age IS NOT NULL
+WHERE p.category IS NOT NULL
+AND u.age IS NOT NULL
 AND o.quantity <= s.stock_quantity
 ORDER BY u.name, u.email;

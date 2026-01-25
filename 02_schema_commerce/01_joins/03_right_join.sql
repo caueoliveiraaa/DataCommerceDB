@@ -1,10 +1,11 @@
 /*
 Purpose: Display a right join.
 Steps:
-    - Find orders with more than 100 units.
+    - Find orders with more than 500 units.
     - Find out how much the user spent on each product.
     - Order by name of users.
 */
+
 SELECT
     u.name user_name,
     u.age user_agr,
@@ -15,5 +16,5 @@ SELECT
 FROM commerce.orders o
 RIGHT OUTER JOIN commerce.users u ON o.user_id = u.user_id
 RIGHT OUTER JOIN commerce.products p ON p.product_id = o.product_id
-WHERE o.quantity > 100
-ORDER BY u.name, u.email;
+WHERE o.quantity > 500
+ORDER BY u.name;

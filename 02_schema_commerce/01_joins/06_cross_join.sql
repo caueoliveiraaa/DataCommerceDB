@@ -5,6 +5,7 @@ Steps:
     - Show user name and product name.
     - This produces a Cartesian product (N users × M products).
 */
+
 SELECT
     u.name AS user_name,
     p.name AS product_name
