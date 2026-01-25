@@ -1,8 +1,12 @@
 /*
 Purpose: Verify all the available procedures that have been created.
+Steps:
+    - Select the information about the procedures from pg_proc.
+    - Apply the filter 'p', which represents 'procedure'.
 */
 
-SELECT proname AS procedure_name,
+SELECT
+    proname AS procedure_name,
     n.nspname AS schema_name,
     pg_get_function_arguments(p.oid) AS arguments,
     pg_get_function_result(p.oid) AS return_type

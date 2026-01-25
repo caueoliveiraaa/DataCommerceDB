@@ -13,25 +13,25 @@ AS $$
 DECLARE
     random_ts TIMESTAMP;
 BEGIN
-    -- Update users
+    -- Update users (created_at)
     UPDATE commerce.users
     SET created_at = TIMESTAMP '2020-01-01'
         + (random() * (EXTRACT(EPOCH FROM TIMESTAMP '2025-12-31 23:59:59'
         - TIMESTAMP '2020-01-01'))) * INTERVAL '1 second';
 
-    -- Update products
+    -- Update products (created_at) 
     UPDATE commerce.products
     SET created_at = TIMESTAMP '2020-01-01'
         + (random() * (EXTRACT(EPOCH FROM TIMESTAMP '2025-12-31 23:59:59'
         - TIMESTAMP '2020-01-01'))) * INTERVAL '1 second';
 
-    -- Update orders
+    -- Update orders (created_at)
     UPDATE commerce.orders
     SET created_at = TIMESTAMP '2020-01-01'
         + (random() * (EXTRACT(EPOCH FROM TIMESTAMP '2025-12-31 23:59:59'
         - TIMESTAMP '2020-01-01'))) * INTERVAL '1 second';
 
-    -- Update stock
+    -- Update stock (last_restock)
     UPDATE commerce.stock
     SET last_restock = TIMESTAMP '2020-01-01'
         + (random() * (EXTRACT(EPOCH FROM TIMESTAMP '2025-12-31 23:59:59'
