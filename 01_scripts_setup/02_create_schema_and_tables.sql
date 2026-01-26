@@ -2,6 +2,7 @@
 Purpose: Sets up the schema commerce and all its tables and table settings.
 Steps:
     - Create the schema commerce.
+    - Drop tables if they exist.
     - Create the table commerce.users and writes its comments.
     - Create the table commerce.products and writes its comments.
     - Create the table commerce.orders and writes its comments.
@@ -10,16 +11,13 @@ Steps:
     - Create constraint that only allows one product per registered stock.
 */
 
--- Create schema commerce
 CREATE SCHEMA IF NOT EXISTS commerce;
 
--- Drop tables if they exist (order matters because of foreign keys)
 DROP TABLE IF EXISTS commerce.stock CASCADE;
 DROP TABLE IF EXISTS commerce.orders CASCADE;
 DROP TABLE IF EXISTS commerce.products CASCADE;
 DROP TABLE IF EXISTS commerce.users CASCADE;
 
--- Create table users into schema commerce
 CREATE TABLE IF NOT EXISTS commerce.users (
     user_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -31,7 +29,6 @@ CREATE TABLE IF NOT EXISTS commerce.users (
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
--- Create table products into schema commerce
 CREATE TABLE IF NOT EXISTS commerce.products (
     product_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(70) UNIQUE NOT NULL,
@@ -41,7 +38,6 @@ CREATE TABLE IF NOT EXISTS commerce.products (
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
--- Create table orders into schema commerce
 CREATE TABLE IF NOT EXISTS commerce.orders (
     order_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES commerce.users(user_id) ON DELETE RESTRICT,
@@ -53,7 +49,6 @@ CREATE TABLE IF NOT EXISTS commerce.orders (
     CONSTRAINT unique_user_product_day UNIQUE (user_id, product_id, created_date)
 );
 
--- Create table stock into schema commerce
 CREATE TABLE IF NOT EXISTS commerce.stock (
     stock_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     product_id INTEGER NOT NULL REFERENCES commerce.products(product_id) ON DELETE CASCADE,
@@ -61,6 +56,5 @@ CREATE TABLE IF NOT EXISTS commerce.stock (
     last_restock TIMESTAMP
 );
 
--- Create constraint that only allows one product per registered stock
 ALTER TABLE commerce.stock
 ADD CONSTRAINT unique_product_stock UNIQUE (product_id);

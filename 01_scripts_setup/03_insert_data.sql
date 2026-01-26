@@ -7,7 +7,6 @@ Steps:
     - Insert data into the commerce.stock table.
 */
 
--- Injects all users into the commerce.users table.
 BEGIN;
 
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE;
@@ -215,7 +214,6 @@ ON CONFLICT (email) DO NOTHING;
 
 COMMIT;
 
--- Injects all products into the commerce.products table.
 BEGIN;
 
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE;
@@ -1023,7 +1021,6 @@ ON CONFLICT (name) DO NOTHING;
 
 COMMIT;
 
--- Injects all orders into the commerce.orders table.
 BEGIN;
 
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE;
@@ -2455,7 +2452,6 @@ ON CONFLICT (user_id, product_id, created_date) DO NOTHING;
 
 COMMIT;
 
--- Injects all orders into the commerce.stock table.
 BEGIN;
 
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE;
