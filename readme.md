@@ -36,7 +36,9 @@ DataCommerceDB/
 │   │   ├── 03_valid_products.sql
 │   │   ├── 04_invalid_products.sql
 │   │   ├── 05_top_valid_producsts.sql
-│   │   └── 06_all_rows_with_nulls.sql
+│   │   ├── 06_all_rows_with_nulls.sql
+│   │   ├── 07_all_users_orders.sql
+│   │   └── 08_average_per_category.sql
 │   │
 │   ├── 03_functions/
 │   │   ├── 01_check_all_functions.sql
