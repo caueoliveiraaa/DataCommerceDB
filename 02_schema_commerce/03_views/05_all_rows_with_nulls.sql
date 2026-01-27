@@ -1,15 +1,9 @@
 /*
 Purpose: Find all rows with null values from all four tables.
-Steps:
-    - Drop the view if it exists.
-    - Create the view that queries all rows that have null values.
-    - Query the view to display the result.
 */
 
--- Drop the view if it exists
 DROP VIEW IF EXISTS commerce.null_records;
 
--- Create the view, applying the logic of the query
 CREATE VIEW commerce.null_records AS
 SELECT
     u.user_id AS user_id,
@@ -36,5 +30,4 @@ OR o.updated_at IS NULL
 OR s.last_restock IS NULL
 ORDER BY u.user_id;
 
--- Select data from the view that has been created
 SELECT * FROM commerce.null_records;
