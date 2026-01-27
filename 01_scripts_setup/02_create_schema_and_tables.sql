@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS commerce.orders CASCADE;
 DROP TABLE IF EXISTS commerce.products CASCADE;
 DROP TABLE IF EXISTS commerce.users CASCADE;
 
-CREATE TABLE IF NOT EXISTS commerce.users (
+CREATE TABLE IF NOT EXISTS commerce.users(
     user_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS commerce.users (
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS commerce.products (
+CREATE TABLE IF NOT EXISTS commerce.products(
     product_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(70) UNIQUE NOT NULL,
     price NUMERIC(10, 2) NOT NULL CHECK (price > 0.0),
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS commerce.products (
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS commerce.orders (
+CREATE TABLE IF NOT EXISTS commerce.orders(
     order_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES commerce.users(user_id) ON DELETE RESTRICT,
     product_id INTEGER NOT NULL REFERENCES commerce.products(product_id) ON DELETE RESTRICT,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS commerce.orders (
     CONSTRAINT unique_user_product_day UNIQUE (user_id, product_id, created_date)
 );
 
-CREATE TABLE IF NOT EXISTS commerce.stock (
+CREATE TABLE IF NOT EXISTS commerce.stock(
     stock_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     product_id INTEGER NOT NULL REFERENCES commerce.products(product_id) ON DELETE CASCADE,
     stock_quantity INTEGER NOT NULL CHECK (stock_quantity >= 0),
