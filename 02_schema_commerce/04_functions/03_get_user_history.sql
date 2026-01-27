@@ -10,14 +10,14 @@ RETURNS TABLE(
 	product_price NUMERIC(10, 2),
 	quantity_ordered INT,
 	total_spent_on_product NUMERIC(10, 2)
-) AS $$
+)
+AS $$
 BEGIN
     IF param_user_id IS NULL
     OR param_user_id <= 0 THEN
-        RAISE EXCEPTION 'The user id cannot be null or zero';
+        RAISE EXCEPTION 'The user id cannot be null or zero!';
     END IF;
-    RETURN QUERY
-    SELECT 
+    RETURN QUERY SELECT 
         p.name,
         p.price,
         o.quantity,

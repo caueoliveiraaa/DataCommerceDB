@@ -6,7 +6,8 @@ CREATE OR REPLACE FUNCTION commerce.check_stock(
 	param_product_id INT,
 	requested_amount INT
 )
-RETURNS BOOLEAN AS $$
+RETURNS BOOLEAN
+AS $$
 DECLARE
 	available_quantity INT;
 BEGIN
