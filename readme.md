@@ -4,7 +4,7 @@
 
 A PostgreSQL analytical database project focused on **user behavior, product performance, and sales trends.**</br>
 It provides a SQL‑only workflow with modular scripts for database lifecycle management, schema definition, and data population. The project emphasizes clean design practices and prepares the ground for advanced analytics through views, functions, and procedures.</br></br>
-This project was made for educational purposes, therefore it contains some exercises, some documentations for consulting SQL concepts, etc. However, it mirrors a real life database project.
+This project was made for educational purposes, therefore it contains some exercises, some documentations for consulting SQL concepts, logic that sometimes would not be ideal in real world projects, etc. However, it mirrors a real life database project.
 
 ## 🐘 Project Structure
 
@@ -24,45 +24,51 @@ DataCommerceDB/
 │   │   ├── 03_right_join.sql
 │   │   ├── 04_full_join.sql
 │   │   ├── 05_self_join.sql
-│   │   └── 07_cross_join.sql
+│   │   └── 06_cross_join.sql
 │   │
 │   ├── 02_subqueries/
+│   │   ├── 01_subquery_select.sql
+│   │   ├── 02_subquery_from.sql
+│   │   ├── 03_subquery_where.sql
+│   │   └── 04_subquery_correlated.sql
+│   │
+│   ├── 03_views/
+│   │   ├── 01_inactive_users.sql
+│   │   ├── 02_valid_products.sql
+│   │   ├── 03_invalid_products.sql
+│   │   ├── 04_top_valid_producsts.sql
+│   │   ├── 05_all_rows_with_nulls.sql
+│   │   └── 06_all_users_orders.sql
+│   │
+│   ├── 04_functions/
+│   │   ├── 01_check_stock.sql
+│   │   ├── 02_try_division.sql
+│   │   └── 03_get_user_history.sql
+│   │
+│   ├── 05_procedures/
+│   │   ├── 01_insert_random_dates.sql
+│   │   ├── 02_increment_stock.sql
+│   │   └── 03_insert_new_users.sql
+│   │
+│   ├── 06_triggers/
+│   │   └── 01_update_timestamp.sql
+│   │
+│   ├── 07_indexes/
 │   │   └── .sql
 │   │
-│   ├── 02_views/
-│   │   ├── 01_check_all_views.sql
-│   │   ├── 02_views_queries.sql
-│   │   ├── 03_inactive_users.sql
-│   │   ├── 03_valid_products.sql
-│   │   ├── 04_invalid_products.sql
-│   │   ├── 05_top_valid_producsts.sql
-│   │   ├── 06_all_rows_with_nulls.sql
-│   │   ├── 07_all_users_orders.sql
-│   │   └── 08_average_per_category.sql
+│   ├── 08_ctes/
+│   │   ├── 01_oldest_ten_users.sql
+│   │   ├── 02_highest_price_per_category.sql
+│   │   ├── 03_all_active_users_with_orders.sql
+│   │   └── 04_quantity_of_invalid_users.sql
 │   │
-│   ├── 03_functions/
-│   │   ├── 01_check_all_functions.sql
-│   │   ├── 02_functions_calls.sql
-│   │   ├── 03_calculate_discount.sql
-│   │   └── 04_predict_revenue.sql
+│   ├── 09_window_functions/
+│   │   ├── 01_top_three_rank.sql
+│   │   ├── 02_top_three_dense_rank.sql
+│   │   └── 03_percentage_diff_lag.sql
 │   │
-│   ├── 04_procedures/
-│   │   ├── 01_check_all_procdures.sql
-│   │   ├── 02_procedures_calls.sql
-│   │   └── 03_insert_random_dates.sql
-│   │
-│   ├── 05_triggers/
-│   │   ├── 01_check_all_triggers.sql
-│   │   └── 02_update_timestamp.sql
-│   │
-│   ├── 06_indexes/
-│   │   └── .sql
-│   │
-│   ├── 07_ctes/
-│   │   └── .sql
-│   │
-│   └── 08_tests/
-│   │   └── .sql
+│   └── 10_tests/
+│       └── .sql
 │
 ├── 03_exercises/
 │   ├── 01_basic_exercises.sql
@@ -102,6 +108,7 @@ The 02_schema_commerce/ folder contains reusable SQL logic for manipulating and 
 - Procedures.
 - Indexes.
 - CTEs.
+- Window Functions.
 - Tests.
 
 ### 🦾 Exercises
