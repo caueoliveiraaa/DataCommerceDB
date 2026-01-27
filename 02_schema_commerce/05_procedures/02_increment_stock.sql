@@ -6,7 +6,8 @@ CREATE OR REPLACE PROCEDURE commerce.increment_stock(
 	param_product_id INT,
 	amount_insert INT
 )
-LANGUAGE plpgsql AS $$
+LANGUAGE plpgsql
+AS $$
 DECLARE
 	available_quantity INT;
 BEGIN
@@ -14,16 +15,15 @@ BEGIN
 	OR amount_insert IS NULL
 	OR param_product_id = 0
 	OR amount_insert = 0 THEN
-		RAISE EXCEPTION 'Parameters cannot be null or zero';
+		RAISE EXCEPTION 'Parameters cannot be null or zero!';
 	END IF;
-
 	WHILE amount_insert > 0 LOOP
 		SELECT s.stock_quantity INTO available_quantity
 		FROM commerce.stock s
 		WHERE s.product_id = param_product_id;
 		
 		IF available_quantity = 1000 THEN
-			RAISE EXCEPTION 'The limit quantity per stock is 1000';
+			RAISE EXCEPTION 'The limit quantity per stock is 1000.';
 		END IF;
 	
 		UPDATE commerce.stock

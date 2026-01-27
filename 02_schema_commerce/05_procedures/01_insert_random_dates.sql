@@ -1,13 +1,10 @@
 /*
 Purpose: Create or replace the procedures that inserts random dates into tables.
-Steps:
-    - Create or replace the procedure randomize_created_dates.
-    - Apply the logic of inserting random dates into all tables.
-    - Call the procedure at the end, after the creation has been executed.
 */
 
 CREATE OR REPLACE PROCEDURE commerce.randomize_created_dates()
-LANGUAGE plpgsql AS $$
+LANGUAGE plpgsql 
+AS $$
 DECLARE
     random_ts TIMESTAMP;
 BEGIN
