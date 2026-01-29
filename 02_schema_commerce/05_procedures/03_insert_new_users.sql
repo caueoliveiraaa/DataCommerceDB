@@ -9,6 +9,7 @@ BEGIN
 	IF quantity IS NULL OR quantity = 0 THEN
 		RAISE EXCEPTION 'Parameter "quantity" cannot be null or zero!';
 	END IF;
+
 	WHILE quantity > 0 LOOP
 		INSERT INTO commerce.users(email, name, age, address, created_at)
 		SELECT
@@ -60,16 +61,19 @@ BEGIN
 				]
 			) AS random_address ) r
 		ORDER BY RANDOM() 
-		LIMIT 1;
+		LIMIT 1
+		ON CONFLICT (email) DO NOTHING;
+
 		quantity := quantity - 1;
 	END LOOP;
 EXCEPTION 
 	WHEN unique_violation THEN
-		RAISE NOTICE 'Duplicate email, skipping insert.';
+		RAISE NOTICE 'Duplicate email, skipping insert. Try again.';
 	WHEN OTHERS THEN
 		RAISE NOTICE 'An error occured while inserting new users: %', SQLERRM;
 END;
 $$;
 
-CALL commerce.insert_random_users(3);
+CALL commerce.insert_random_users(1);
 SELECT * FROM commerce.users WHERE created_at::date = current_date;
+-- SELECT COUNT(*) FROM commerce.users;
