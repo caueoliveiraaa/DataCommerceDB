@@ -4,7 +4,7 @@ Notes:
     - The following commands should be executed individually.
 */
 
--- Query to search orders between date range
+-- Query to search orders between date range via execution plan
 EXPLAIN ANALYZE
 SELECT o.order_id, o.user_id, o.product_id, o.created_at
 FROM commerce.orders o
