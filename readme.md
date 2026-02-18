@@ -109,6 +109,7 @@ The 02_schema_commerce/ folder contains reusable SQL logic for manipulating and 
 - Indexes.
 - CTEs.
 - Window Functions.
+- Improving Queries.
 - Tests.
 
 ### 🦾 Exercises
