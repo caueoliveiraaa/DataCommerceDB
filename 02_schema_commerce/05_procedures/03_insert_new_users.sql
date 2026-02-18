@@ -9,7 +9,6 @@ BEGIN
 	IF quantity IS NULL OR quantity = 0 THEN
 		RAISE EXCEPTION 'Parameter "quantity" cannot be null or zero!';
 	END IF;
-
 	WHILE quantity > 0 LOOP
 		INSERT INTO commerce.users(email, name, age, address, created_at)
 		SELECT
@@ -63,7 +62,6 @@ BEGIN
 		ORDER BY RANDOM() 
 		LIMIT 1
 		ON CONFLICT (email) DO NOTHING;
-
 		quantity := quantity - 1;
 	END LOOP;
 EXCEPTION 
