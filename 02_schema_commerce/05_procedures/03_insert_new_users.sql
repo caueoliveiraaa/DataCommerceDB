@@ -76,5 +76,3 @@ $$;
 
 CALL commerce.insert_random_users(1);
 SELECT * FROM commerce.users WHERE created_at::date = current_date;
--- DELETE FROM commerce.users WHERE created_at::date = current_date;
--- SELECT COUNT(*) FROM commerce.users;
