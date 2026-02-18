@@ -15,7 +15,7 @@ DataCommerceDB/
 │   ├── 01_drop_and_create_database.sql
 │   ├── 02_create_schema_and_tables.sql
 │   ├── 03_insert_data.sql
-│   └── 04_check_data.sql
+│   └── 04_check_inserted_data.sql
 │
 ├── 02_schema/
 │   ├── 01_joins/
@@ -48,27 +48,28 @@ DataCommerceDB/
 │   ├── 05_procedures/
 │   │   ├── 01_insert_random_dates.sql
 │   │   ├── 02_increment_stock.sql
-│   │   └── 03_insert_new_users.sql
+│   │   ├── 03_insert_new_users.sql
+│   │   └── 04_insert_recent_months.sql
 │   │
 │   ├── 06_triggers/
 │   │   └── 01_update_timestamp.sql
 │   │
 │   ├── 07_indexes/
-│   │   └── .sql
+│   │   └── 01_non_clustered_index_user_id.sql
 │   │
 │   ├── 08_ctes/
 │   │   ├── 01_oldest_ten_users.sql
 │   │   ├── 02_highest_price_per_category.sql
 │   │   ├── 03_all_active_users_with_orders.sql
-│   │   └── 04_quantity_of_invalid_users.sql
+│   │   ├── 04_quantity_of_invalid_users.sql
+│   │   └── 05_turn_query_into_cte.sql
 │   │
 │   ├── 09_window_functions/
 │   │   ├── 01_top_three_rank.sql
-│   │   ├── 02_top_three_dense_rank.sql
-│   │   └── 03_percentage_diff_lag.sql
+│   │   └── 02_percentage_diff_lag.sql
 │   │
-│   └── 10_tests/
-│       └── .sql
+│   └── 10_improving_a_query/
+│   │   └── 01_improve_select.sql
 │
 ├── 03_exercises/
 │   ├── 01_basic_exercises.sql
