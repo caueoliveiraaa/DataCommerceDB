@@ -17,19 +17,20 @@ BEGIN
 	OR amount_insert = 0 THEN
 		RAISE EXCEPTION 'Parameters cannot be null or zero!';
 	END IF;
+
 	WHILE amount_insert > 0 LOOP
 		SELECT s.stock_quantity INTO available_quantity
 		FROM commerce.stock s
 		WHERE s.product_id = param_product_id;
-		
+
 		IF available_quantity = 1000 THEN
 			RAISE EXCEPTION 'The limit quantity per stock is 1000.';
 		END IF;
-	
+
 		UPDATE commerce.stock
 		SET stock_quantity = stock_quantity + 1
 		WHERE product_id = param_product_id;
-
+		
 		amount_insert := amount_insert - 1;
 	END LOOP;
 END;

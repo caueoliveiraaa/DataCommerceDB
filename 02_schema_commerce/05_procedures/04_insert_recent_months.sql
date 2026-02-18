@@ -20,7 +20,7 @@ BEGIN
     UPDATE commerce.orders
     SET created_at = start_date
         + (random() * (EXTRACT(EPOCH FROM end_date - start_date))) * INTERVAL '1 second';
-
+        
     UPDATE commerce.stock
     SET last_restock = start_date
         + (random() * (EXTRACT(EPOCH FROM end_date - start_date))) * INTERVAL '1 second';
