@@ -69,7 +69,8 @@ DataCommerceDB/
 │   │   └── 02_percentage_diff_lag.sql
 │   │
 │   └── 10_improving_a_query/
-│   │   └── 01_improve_select.sql
+│   │   ├── 01_top_three_rank.sql
+│   │   └── 02_create_indexes.sql
 │
 ├── 03_exercises/
 │   ├── 01_basic_exercises.sql
