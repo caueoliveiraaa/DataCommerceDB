@@ -17,6 +17,7 @@ BEGIN
     OR param_user_id <= 0 THEN
         RAISE EXCEPTION 'The user id cannot be null or zero!';
     END IF;
+
     RETURN QUERY SELECT 
         p.name,
         p.price,
