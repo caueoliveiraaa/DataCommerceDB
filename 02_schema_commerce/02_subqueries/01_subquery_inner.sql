@@ -1,10 +1,5 @@
 /*
 Purpose: Turn the inner join logic into a subquery in the select list.
-Steps:
-    - Remove categories and ages that are null.
-    - Find the amount of products that respect the stock amount.
-    - Order by name of users and then their email.
-    - Apply the inner join logic to the subquery in the select statement.
 */
 
 SELECT * FROM
