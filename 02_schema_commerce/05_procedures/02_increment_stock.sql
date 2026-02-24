@@ -23,7 +23,7 @@ BEGIN
 		FROM commerce.stock s
 		WHERE s.product_id = param_product_id;
 
-		IF available_quantity = 1000 THEN
+		IF available_quantity >= 1000 THEN
 			RAISE EXCEPTION 'The limit quantity per stock is 1000.';
 		END IF;
 
