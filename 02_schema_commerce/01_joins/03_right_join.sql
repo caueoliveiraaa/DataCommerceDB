@@ -1,9 +1,5 @@
 /*
 Purpose: Display a right join.
-Steps:
-    - Find orders with more than 500 units.
-    - Find out how much the user spent on each product.
-    - Order by name of users.
 */
 
 SELECT

@@ -2,7 +2,6 @@
 Purpose: Display all possible combinations of users and products.
 Steps:
     - Use CROSS JOIN to combine every user with every product.
-    - Show user name and product name.
     - This produces a Cartesian product (N users × M products).
 */
 

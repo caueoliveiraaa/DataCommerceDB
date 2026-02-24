@@ -1,9 +1,5 @@
 /*
 Purpose: Display an inner join, joining all tables.
-Steps:
-    - Remove categories and ages that are null.
-    - Find the amount of products that respect the stock amount.
-    - Order by name of users and then their email.
 */
 
 SELECT

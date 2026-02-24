@@ -1,9 +1,5 @@
 /*
 Purpose: Display a full join.
-Steps:
-    - Show all users and all orders Even if some users never ordered 
-        or some orders have no user.
-    - Order by user id and then name in descending order.
 */
 
 SELECT
