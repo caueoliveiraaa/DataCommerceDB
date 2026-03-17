@@ -3,8 +3,7 @@
 ## ℹ️ About the project
 
 A PostgreSQL analytical database project focused on **user behavior, product performance, and sales trends.**</br>
-It provides a SQL‑only workflow with modular scripts for database lifecycle management, schema definition, and data population. The project emphasizes clean design practices and prepares the ground for advanced analytics through views, functions, and procedures.</br></br>
-This project was made for educational purposes, therefore it contains some exercises, some documentations for consulting SQL concepts, logic that sometimes would not be ideal in real world projects, etc. However, it mirrors a real life database project.
+It provides a SQL‑only workflow with modular scripts for database lifecycle management, schema definition, and data population. The project emphasizes clean design practices and prepares the ground for advanced analytics through views, functions, and procedures.
 
 ## 🐘 Project Structure
 
@@ -69,18 +68,8 @@ DataCommerceDB/
 │   │   └── 02_percentage_diff_lag.sql
 │   │
 │   └── 10_improving_a_query/
-│   │   ├── 01_top_three_rank.sql
-│   │   └── 02_create_indexes.sql
-│
-├── 03_exercises/
-│   ├── 01_basic_exercises.sql
-│   ├── 02_join_and_subqueries.md
-│   ├── 03_modifying_data.md
-│   ├── 04_aggragate.md
-│   ├── 05_transactions.md
-│   ├── 06_dates.md
-│   ├── 07_strings.md
-│   └── 08_recursive.md
+│       ├── 01_top_three_rank.sql
+│       └── 02_create_indexes.sql
 │
 ├── .gitignore
 └── readme.md
@@ -113,11 +102,6 @@ The 02_schema_commerce/ folder contains reusable SQL logic for manipulating and 
 - Window Functions.
 - Improving Queries.
 - Tests.
-
-### 🦾 Exercises
-
-The exercises/ folder contains PostgreSQL exercises for learning and practicing SQL with real world problem-solving.</br>
-They can be found on [this website](https://pgexercises.com/).
 
 ### 📂 Root
 
