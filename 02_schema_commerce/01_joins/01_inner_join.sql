@@ -1,5 +1,13 @@
 /*
 Purpose: Display an inner join, joining all tables.
+Steps:
+    - Get the data from the users table.
+    - Join the orders with the users via user id.
+    - Join the products with the users via product id.
+    - Join the stocks with the products via product id
+    - Get only the categories and ages that are no null.
+    - Get only valid oder quantities that are <= stock quantity.
+    - Order by the user name and email.
 */
 
 SELECT
