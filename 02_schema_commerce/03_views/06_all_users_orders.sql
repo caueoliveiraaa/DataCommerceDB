@@ -1,5 +1,12 @@
 /*
 Purpose: Retrieves the total number of orders placed by each user.
+Steps:
+    - Make sure the view is created without errors.
+    - Select the user name, the order if and count the order id.
+    - Join the table users with orders via user id.
+    - Get only the users who are active.
+    - Group the count by user if and user name.
+    - Order by the count, starting from the highest.
 */
 
 DROP VIEW IF EXISTS commerce.all_orders_by_user;
