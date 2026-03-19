@@ -8,6 +8,8 @@ Steps:
     - Get only the categories and ages that are no null.
     - Get only valid oder quantities that are <= stock quantity.
     - Order by the user name and email.
+Notes:
+    - The inner join brings only the rows that match in both tables.
 */
 
 SELECT
