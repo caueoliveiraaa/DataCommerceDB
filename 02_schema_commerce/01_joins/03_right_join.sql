@@ -1,5 +1,15 @@
 /*
 Purpose: Display a right join.
+Steps:
+    - Get data from orders, users and products.
+    - Join the users with the orders via user id.
+    - Join the products with the orders via product id.
+    - Get only the quantities that are higher than 500.
+    = Order by the user's name.
+Notes:
+    - The right join brings all the matching rows from the right table and
+    the possible matching rows from the left table, bring null values 
+    where there is no match on the left side.
 */
 
 SELECT
