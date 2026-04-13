@@ -1,11 +1,5 @@
 /*
 Purpose: Retrieve how much was spend on each product category.
-Steps:
-    - Make sure the view is created without errors.
-    - Select the category and calculate the amount spend on the price column.
-    - Get only categories which are not null.
-    - Group the result of the price sum into each category.
-    - Order by the total spent, starting from the highest.
 */
 
 DROP VIEW IF EXISTS commerce.amount_spent_per_category;
