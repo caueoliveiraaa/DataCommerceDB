@@ -1,9 +1,5 @@
 /*
 Purpose: Display a full join.
-Steps:
-    - Get data from users and orders.
-    - Join the orders with the users via user id.
-    - Order by the user's name.
 Notes:
     - A full join brings all the matching rows and rows that don't match 
     was well from both tables, bringing null values where there is no match.
