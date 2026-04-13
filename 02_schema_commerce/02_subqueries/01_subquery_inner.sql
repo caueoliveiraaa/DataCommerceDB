@@ -1,5 +1,11 @@
 /*
 Purpose: Turn the inner join logic into a subquery in the select list.
+Steps:
+    - Find the users whose age is not null.
+    - Find the categories that are not null.
+    - Find valid oder quantities.
+    - Order by the name and email of the users.
+    - Apply the inner join logic into a subquery in the from clause.
 */
 
 SELECT * FROM
