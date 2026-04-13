@@ -1,10 +1,5 @@
 /*
 Purpose: Display the left join logic into a subquery.
-Steps:
-    - Find orders with more than 100 units.
-    - Find out how much the user spent on each product.
-    - Order by the name of users.
-    - Apply the left join logic into a subquery in the from clause.
 */
 
 SELECT *
